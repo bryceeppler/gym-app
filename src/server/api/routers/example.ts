@@ -1,0 +1,132 @@
+import { z } from "zod";
+
+import { createTRPCRouter, publicProcedure } from "../trpc";
+
+export const exampleRouter = createTRPCRouter({
+  hello: publicProcedure
+    .input(z.object({ text: z.string() }))
+    .query(({ input }) => {
+      return {
+        greeting: `Hello ${input.text}`,
+      };
+    }),
+    getUser: publicProcedure
+    // id is an integer
+    .input(z.object({ id: z.number() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.users.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+    }),
+    getUncompletedWorkouts: publicProcedure
+    // return all workouts where the is not a completedWorkout entry for the user
+    .input(z.object({ id: z.number() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.workouts.findMany({
+        where: {
+          completedWorkouts: {
+            every: {
+              userId: {
+                not: input.id,
+              },
+            },
+          },
+        },
+      });
+
+    }
+  ),
+  //   .mutation(async ({ ctx, input }) => {
+  //     try {
+  //       await ctx.prisma.workouts.findMany({
+  //         where: {
+  //           completedWorkouts: {
+  //             every: {
+  //               userId: {
+  //                 not: input.id,
+  //               },
+  //             },
+  //           },
+  //         },
+  //       });
+  //     }
+  //     catch (err) {
+  //       console.log(err);
+  //     }
+
+  //   }
+  // ),
+
+  getUserStats: publicProcedure
+    // return {coldPlunges: 0, workoutsCompleted: 0, workoutsSkipped: 0}
+    // coldPlunges is the number of completedWorkouts for this user with the title "Cold plunge"
+    // workoutsCompleted is the number of completedWorkouts for this user where the status ==   "completed"
+    // workoutsSkipped is the number of completedWorkouts for this user where the status == "skipped"
+    .input(z.object({ id: z.number() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.users.findUnique({
+        where: {
+          id: input.id,
+        },
+        // get completedWorkouts for the user
+        include: {
+          completedWorkouts: true,
+        },
+      }).then((user) => {
+        // count the number of completedWorkouts with the title "Cold plunge"
+        const coldPlunges = user?.completedWorkouts.filter((workout) => {
+          // check title = "Cold plunge" and status = "completed"
+          return workout.title === "Cold plunge" && workout.status === "completed";
+        }).length;
+        // count the number of completedWorkouts with the status "completed"
+        const workoutsCompleted = user?.completedWorkouts.filter((workout) => {
+          return workout.status === "completed" && workout.title !== "Cold plunge";
+        }).length;
+        // count the number of completedWorkouts with the status "skipped"
+        const workoutsSkipped = user?.completedWorkouts.filter((workout) => {
+          return workout.status === "skipped";
+        }).length;
+
+        return {
+          coldPlunges,
+          workoutsCompleted,
+          workoutsSkipped,
+        };
+      });
+    }
+  ),
+  completeWorkout: publicProcedure
+    // accept a workout id and user id and create a completedWorkout entry with the given status
+    // return the completedWorkout entry
+    .input(z.object({ id: z.number(), userId: z.number(), status: z.string(), title: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      try {
+        await ctx.prisma.completedWorkouts.create({
+          data: {
+            workoutId: input.id,
+            userId: input.userId,
+            status: input.status,
+            title: input.title,
+          },
+        });
+      }
+      catch (err) {
+        console.log(err);
+      }
+
+    }
+  ),
+  getCompletedWorkouts: publicProcedure
+  // return the most recent 15 completed workouts
+  .query(({ ctx }) => {
+    return ctx.prisma.completedWorkouts.findMany({
+      take: 30,
+      orderBy: {
+        completedAt: "desc",
+      },
+    });
+  }
+),
+});
