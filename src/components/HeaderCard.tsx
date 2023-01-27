@@ -2,15 +2,18 @@ import React from 'react'
 
 type Props = {
     username?: string
+    daysLeft?: number 
 }
 
-export default function HeaderCard({ username }: Props) {
+
+export default function HeaderCard({ username, daysLeft }: Props) {
   return (
-    <div className="col-span-8 flex h-24 flex-col justify-center bg-white p-4 text-left md:col-span-2">
+    <div className="col-span-8 flex h-24 flex-col justify-center bg-gray-800 text-white p-4 text-left md:col-span-2 rounded-sm">
     <div className="text-xl font-bold">
-      Welcome back {username}!
+      {username}
     </div>
-    <div className="text-md font-bold opacity-50">Onslaught Day 46</div>
+    <div className="text-md font-bold opacity-50">Onslaught</div>
+    <div className="text-md font-bold opacity-70 text-blue-500">{daysLeft} days remaining</div>
   </div>
   )
 }

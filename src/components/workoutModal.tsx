@@ -29,6 +29,7 @@ export default function WorkoutModal({}: Props) {
         // invalidate query to update the UI
         utils.example.getUncompletedWorkouts.invalidate();
         utils.example.getUserStats.invalidate();
+        utils.example.getCompletedWorkouts.invalidate();
       },
     }
   );
@@ -42,7 +43,7 @@ export default function WorkoutModal({}: Props) {
         setShowWorkoutModal(!showWorkoutModal);
       }}
     >
-      <div className="z-30 flex h-auto w-full max-w-md flex-col items-center justify-center rounded bg-white p-5">
+      <div className="z-30 flex h-auto w-full max-w-md flex-col items-center justify-center rounded bg-gray-700 text-white p-5">
         {/* print workout_str including the newlines */}
         <div className="text-xl font-bold">{selectedWorkout.title}</div>
         <div className="text-sm">
@@ -53,7 +54,7 @@ export default function WorkoutModal({}: Props) {
         </div>
         <div className="flex flex-row items-center justify-center space-x-2">
           <button
-            className="my-4 rounded bg-red-500 p-2 text-white transition-all hover:bg-indigo-600"
+            className="my-4 rounded bg-red-600 p-2 text-white transition-all hover:bg-red-500"
             onClick={(e) => {
               e.preventDefault();
               setShowWorkoutModal(!showWorkoutModal);
@@ -71,7 +72,7 @@ export default function WorkoutModal({}: Props) {
             Skip workout
           </button>
           <button
-            className="my-4 rounded bg-indigo-500 p-2 text-white transition-all hover:bg-indigo-600"
+            className="my-4 rounded bg-blue-600 p-2 text-white transition-all hover:bg-blue-500"
             onClick={(e) => {
               e.preventDefault();
               completeWorkout.mutate({

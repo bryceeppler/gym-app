@@ -119,13 +119,15 @@ export const exampleRouter = createTRPCRouter({
     }
   ),
   getCompletedWorkouts: publicProcedure
-  // return the most recent 15 completed workouts
+  // return the most recent 7 completedWorkouts for each user
   .query(({ ctx }) => {
-    return ctx.prisma.completedWorkouts.findMany({
-      take: 30,
-      orderBy: {
-        completedAt: "desc",
+    return ctx.prisma.users.findMany({
+      take: 7,
+      // sort completedWorkouts by completedAt
+      include: {
+        completedWorkouts: true,
       },
+
     });
   }
 ),
