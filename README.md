@@ -1,3 +1,8 @@
+# trpc experiment
+This is an experiment - creating a gym competition app for two users using create-t3-app.
+
+`npm run dev`
+
 ![image](https://user-images.githubusercontent.com/65413229/215118875-239372e5-d93d-42fb-8df8-de2434fb841d.png)
 ![image](https://user-images.githubusercontent.com/65413229/215118931-41334b69-e8ba-4d1f-b2fe-c00501c6d686.png)
 
