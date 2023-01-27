@@ -15,7 +15,7 @@ const Home: NextPage = () => {
     selectedWorkout,
     setSelectedWorkout,
   } = useWorkoutModalStore();
-  const userId = 1;
+  const [userId, setUserId] = useState(1);
 
   const {
     data: userData,
@@ -47,6 +47,24 @@ const Home: NextPage = () => {
     error: completedWorkoutsError,
   } = api.example.getCompletedWorkouts.useQuery();
 
+  const {
+    data: userScores,
+    isLoading: userScoresLoading,
+    error: userScoresError,
+  } = api.example.getAllUserScores.useQuery();
+
+  const {
+    data: allUsers,
+    isLoading: allUsersLoading,
+    error: allUsersError,
+  } = api.example.getAllUsers.useQuery();
+
+  const [userSelected, setUserSelected] = useState(false);
+
+  useEffect(() => {
+    console.log("userScores", userScores);
+  }, [userScores]);
+
   const today = new Date();
 
   return (
@@ -57,8 +75,34 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b p-4 from-[#121b36] to-[#161621]">
-        {showWorkoutModal && <WorkoutModal />}
-        <div className="grid w-full max-w-5xl grid-cols-8 gap-4">
+        {showWorkoutModal && <WorkoutModal userId={userId} />}
+        {!userSelected && (
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="text-4xl text-white font-bold">
+              Select a user to view their dashboard
+            </h1>
+            <div className="flex flex-row space-x-4 mt-4">
+              {
+                // map over users and display a button for each user
+                allUsers?.map((user) => (
+                  <button
+                    onClick={() => {
+                      setUserId(user.id);
+                      setUserSelected(true)}
+                    
+                    }
+                    className="bg-blue-500 text-white rounded p-2"
+                  >
+                    {user.username}
+                  </button>
+                ))
+
+              }
+            </div>
+          </div>
+
+        )}
+        {userSelected && <div className="grid w-full max-w-5xl grid-cols-8 gap-4">
           {userData?.username && (
             <HeaderCard
               username={userData?.username}
@@ -75,7 +119,10 @@ const Home: NextPage = () => {
                   workout.title === "Cold plunge"
                     ? "bg-blue-500 p-3 text-white hover:bg-blue-400"
                     : "bg-gray-800 p-3 text-white hover:bg-gray-600"
-                } ${i === 0 && "border-4 border-blue-500"}`}
+                } ${i === 0 && "border-4 border-blue-500"} ${
+                  // if size < md, and index = 4, hide
+                  i === 4 && "hidden md:flex"
+                }`}
                 key={i}
                 onClick={
                   i === 0
@@ -157,11 +204,14 @@ const Home: NextPage = () => {
           </div>
 
           {/* completed workouts */}
-          <div className="col-span-8 mb-4 flex h-auto flex-col space-y-2 bg-gray-800 p-4 text-white md:col-span-6">
+          <div className="col-span-8 mb-4 flex h-auto flex-col space-y-4 bg-gray-800 p-4 text-white md:col-span-6">
             {completedWorkouts?.map((user, i) => (
-              <div className="mt-2 h-auto w-full justify-center px-4">
+              <div className="mt-4 h-auto w-full justify-center px-4">
                 <div className="flex flex-row items-center space-x-0.5 ">
-                  <div className="w-20 text-lg font-bold">{user.username}</div>
+                  <div className="flex flex-col">
+                  <div className="w-20 text-md font-bold">{user.username}</div>
+                  <div className="text-sm opacity-60">{userScores?.find(userScore => userScore.username === user.username)?.score} points</div>
+                  </div>
                   {/* map out tiles for the last 7 completed workouts */}
                   {/* if there arent enough complete workouts, make the tiles gray */}
                   {
@@ -179,6 +229,9 @@ const Home: NextPage = () => {
                             : workout.status === "completed"
                             ? "bg-green-600"
                             : "bg-red-600"
+                        } ${
+                          // if size < md, and index > 5, hide
+                          i > 4 && "hidden md:flex"
                         }`}
                       ></div>
                     ))
@@ -187,7 +240,7 @@ const Home: NextPage = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div>}
       </main>
     </>
   );

@@ -131,4 +131,46 @@ export const exampleRouter = createTRPCRouter({
     });
   }
 ),
+getAllUserScores: publicProcedure
+  // get the completedWorkouts for each user, and create a score
+  // completedWorkouts with the status "completed" are worth 2 points
+  // completedWorkouts with the status "skipped" are worth -1 point
+  // completedWorkouts with the title "Cold plunge" are worth 1 point additional point if their status is "completed"
+  .query(({ ctx }) => {
+    return ctx.prisma.users.findMany({
+      include: {
+        completedWorkouts: true,
+      },
+    }).then((users) => {
+      // create a score for each user
+      const scores = users.map((user) => {
+        // create a score for each completedWorkout
+        const score = user.completedWorkouts.reduce((acc, workout) => {
+          if (workout.status === "completed") {
+            if (workout.title === "Cold plunge") {
+              return acc + 3;
+            }
+            return acc + 2;
+          }
+          if (workout.status === "skipped") {
+            return acc - 1;
+          }
+          return acc;
+        }, 0);
+        return {
+          username: user.username,
+          userId: user.id,
+          score,
+        };
+      });
+      return scores;
+    });
+  }
+),
+getAllUsers: publicProcedure
+  // return all users
+  .query(({ ctx }) => {
+    return ctx.prisma.users.findMany();
+  }
+),
 });

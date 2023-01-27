@@ -13,7 +13,7 @@ export default function HeaderCard({ username, daysLeft }: Props) {
       {username}
     </div>
     <div className="text-md font-bold opacity-50">Onslaught</div>
-    <div className="text-md font-bold opacity-70 text-blue-500">{daysLeft} days remaining</div>
+    <div className="text-md font-bold opacity-70 text-blue-300">{daysLeft} days remaining</div>
   </div>
   )
 }

@@ -3,9 +3,11 @@ import React from "react";
 import { useWorkoutModalStore } from "../store";
 import { api } from "../utils/api";
 
-type Props = {};
+type Props = {
+  userId: number;
+};
 
-export default function WorkoutModal({}: Props) {
+export default function WorkoutModal({userId}: Props) {
   const utils = api.useContext();
   const {
     showWorkoutModal,
@@ -30,6 +32,7 @@ export default function WorkoutModal({}: Props) {
         utils.example.getUncompletedWorkouts.invalidate();
         utils.example.getUserStats.invalidate();
         utils.example.getCompletedWorkouts.invalidate();
+        utils.example.getAllUserScores.invalidate();
       },
     }
   );
@@ -62,7 +65,7 @@ export default function WorkoutModal({}: Props) {
                 id: selectedWorkout.id,
                 status: "skipped",
                 title: selectedWorkout.title || "",
-                userId: 1,
+                userId: userId,
               });
               // invalidate query to update the UI
               // utils.example.getUncompletedWorkouts.invalidate();
@@ -79,7 +82,7 @@ export default function WorkoutModal({}: Props) {
                 id: selectedWorkout.id,
                 status: "completed",
                 title: selectedWorkout.title || "",
-                userId: 1,
+                userId: userId,
               });
 
               setShowWorkoutModal(!showWorkoutModal);
