@@ -30,7 +30,7 @@ const Home: NextPage = () => {
     showWorkoutHistoryModal,
     setShowWorkoutHistoryModal,
   } = useWorkoutModalStore();
-  const [userId, setUserId] = useState(1);
+  const [userId, setUserId] = useState(2);
 
   const {
     data: userData,
