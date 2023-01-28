@@ -1,4 +1,5 @@
 // zustand store
+import { useEffect } from "react";
 import { useWorkoutModalStore } from "../store";
 import { api } from "../utils/api";
 
@@ -14,15 +15,6 @@ export default function WorkoutModal({userId}: Props) {
     selectedWorkout,
   } = useWorkoutModalStore();
   const today = new Date();
-
-  // post request to complete workout using api
-  // on success invalidate   const {
-  //   data: workoutData,
-  //   isLoading: isLoading2,
-  //   error: error2,
-  // } = api.example.getUncompletedWorkouts.useQuery({
-  //   id: userId,
-  // });
   const completeWorkout = api.example.completeWorkout.useMutation(
     {
       onSuccess: () => {
@@ -41,7 +33,9 @@ export default function WorkoutModal({userId}: Props) {
     }
   );
 
-
+    useEffect(() => {
+      console.log("selectedWorkout", selectedWorkout);
+    }, [selectedWorkout]);
   return (
     <div
       className="fixed top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-black bg-opacity-50"
@@ -50,13 +44,27 @@ export default function WorkoutModal({userId}: Props) {
         setShowWorkoutModal(!showWorkoutModal);
       }}
     >
-      <div className="z-30 flex h-auto w-full max-w-md flex-col items-center justify-center rounded bg-gray-700 text-white p-5">
+      <div className="z-30 flex h-auto w-full max-w-md flex-col items-center justify-center rounded bg-gray-700 text-white py-5 px-2"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }>
         {/* print workout_str including the newlines */}
         <div className="text-xl font-bold">{selectedWorkout.title}</div>
         <div className="text-sm">
           {
             // todays date
             today.toDateString().split(" ").slice(1, 3).join(" ")
+          }
+        </div>
+        {/* Workout description */}
+        <div className="text-sm mt-4 overflow-y-scroll h-96 w-full space-y-1 p-2">
+          {
+            // print workout_str including the newlines
+            selectedWorkout.workout_str?.split("\n").map((line, i) => (
+              <div key={i}>{line}</div>
+            ))
           }
         </div>
         <div className="flex flex-row items-center justify-center space-x-2">

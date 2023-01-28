@@ -144,6 +144,7 @@ const Home: NextPage = () => {
                         setSelectedWorkout({
                           title: workout.title || "",
                           id: workout.id,
+                          workout_str: workout.workout_str || "",
                         });
                       }
                     : (e) => e.preventDefault()

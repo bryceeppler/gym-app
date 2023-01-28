@@ -30,14 +30,14 @@ export default function WorkoutHistoryModal({ completedWorkouts }: Props) {
         setShowWorkoutHistoryModal(!showWorkoutHistoryModal);
       }}
     >
-      <div className="z-30 flex h-auto w-full max-w-md flex-col items-center justify-center rounded bg-gray-700 p-5 text-white"
+      <div className="z-30 flex h-auto w-full max-w-md flex-col items-center justify-center rounded bg-gray-700 py-5 px-2 text-white"
         onClick={(e) => {
             e.stopPropagation();
         }}
       >
         <div className="text-xl font-bold">Workout History</div>
         <div className="flex flex-col items-center justify-center space-y-2 w-full 
-            overflow-y-auto max-h-96
+            overflow-y-auto max-h-96 px-2
         ">
           {completedWorkouts?.map((workout: Workout, index) => {
             return (
@@ -47,11 +47,11 @@ export default function WorkoutHistoryModal({ completedWorkouts }: Props) {
                 <div className={`text-sm col-span-3  p-1  text-center rounded-sm bg-opacity-30
                     ${workout.status === "completed" ? "bg-green-500" : "bg-red-500"}
                 `}>{workout.status}</div>
-                <div className="col-span-12">
+                {/* <div className="col-span-12">
                     <div className="flex flex-row space-x-5 justify-center items-center mt-4">
                         <button className="rounded bg-red-600 px-2 text-sm text-white transition-all hover:bg-red-500">Remove</button>
                     </div>
-                </div>
+                </div> */}
               </div>
             );
           })}

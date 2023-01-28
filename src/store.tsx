@@ -7,11 +7,13 @@ type State = {
     selectedWorkout: {
         title?: string
         id: number
+        workout_str?: string
     }
     setSelectedWorkout: (selectedWorkout: {
         // title is optional
         title?: string
         id: number
+        workout_str?: string
     }) => void
     showWorkoutHistoryModal: boolean
     setShowWorkoutHistoryModal: (showWorkoutHistoryModal: boolean) => void
