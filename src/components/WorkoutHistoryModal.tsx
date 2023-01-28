@@ -26,7 +26,7 @@ export default function WorkoutHistoryModal({ completedWorkouts }: Props) {
         <div className="flex flex-col items-center justify-center space-y-2 w-full 
             overflow-y-auto max-h-96
         ">
-          {completedWorkouts?.map((workout: any) => {
+          {completedWorkouts?.map((workout: { title: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; completedAt: { toDateString: () => string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }; status: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | null | undefined; }) => {
             return (
               <div className="transition-all grid grid-cols-12 w-full p-3 bg-gray-600 hover:bg-gray-700 rounded-sm">
                 <div className="text-md col-span-4 font-bold">{workout.title}</div>
