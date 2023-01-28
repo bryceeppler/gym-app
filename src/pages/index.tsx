@@ -131,7 +131,7 @@ const Home: NextPage = () => {
                 // if workout.workout_str?.split(" ")[0] === "Cold" we want bg color to be blue
                 className={`flex h-24 w-full flex-col justify-between rounded ${ workout.title === "Cold plunge" ? "bg-blue-500 p-3 text-white hover:bg-blue-400" : "bg-gray-800 p-3 text-white hover:bg-gray-600" } ${i === 0 ? "border-4 border-blue-500" : ""} ${ 
                   // if size < md, and index = 4, hide 
-                  i === 4 ? "hidden md:flex" : "" }`}
+                  i >= 3 ? "hidden md:flex" : "" }`}
                 key={i}
                 onClick={
                 (e) => {
