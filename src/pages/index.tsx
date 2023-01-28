@@ -74,7 +74,6 @@ const Home: NextPage = () => {
   );
   
   // check type of completedWorkouts
-  const userCompletedWorkouts: typeof completedWorkouts = completedWorkouts as Workout[];
 
   const today = new Date();
 
@@ -90,7 +89,7 @@ const Home: NextPage = () => {
         {showWorkoutHistoryModal && completedWorkouts && <WorkoutHistoryModal 
         // should be the array of completed workouts where the user id matches the user id of the user selected
         
-          completedWorkouts={userCompletedWorkouts}
+          completedWorkouts={completedWorkouts}
           
         />}
         {!userSelected && (

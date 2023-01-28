@@ -35,6 +35,8 @@ export default function WorkoutModal({userId}: Props) {
         .catch((err) => console.log(err));
         utils.example.getAllUserScores.invalidate()
         .catch((err) => console.log(err));
+        utils.workout.getCompletedWorkouts.invalidate()
+        .catch((err) => console.log(err));
       },
     }
   );
