@@ -13,6 +13,8 @@ type State = {
         title?: string
         id: number
     }) => void
+    showWorkoutHistoryModal: boolean
+    setShowWorkoutHistoryModal: (showWorkoutHistoryModal: boolean) => void
 
 
 }
@@ -24,8 +26,9 @@ export const useWorkoutModalStore = create<State>((set) => ({
         title: '',
         id: 0
     },
-    setSelectedWorkout: (selectedWorkout) => set({ selectedWorkout })
-    
+    setSelectedWorkout: (selectedWorkout) => set({ selectedWorkout }),
+    showWorkoutHistoryModal: false,
+    setShowWorkoutHistoryModal: (showWorkoutHistoryModal) => set({ showWorkoutHistoryModal })
 
 }))
 

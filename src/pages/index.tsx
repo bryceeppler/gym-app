@@ -7,13 +7,15 @@ import { useEffect, useState } from "react";
 import { useWorkoutModalStore } from "../store";
 import WorkoutModal from "../components/workoutModal";
 import HeaderCard from "../components/HeaderCard";
-
+import WorkoutHistoryModal from "../components/WorkoutHistoryModal";
 const Home: NextPage = () => {
   const {
     showWorkoutModal,
     setShowWorkoutModal,
     selectedWorkout,
     setSelectedWorkout,
+    showWorkoutHistoryModal,
+    setShowWorkoutHistoryModal,
   } = useWorkoutModalStore();
   const [userId, setUserId] = useState(1);
 
@@ -76,6 +78,13 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b p-4 from-[#121b36] to-[#161621]">
         {showWorkoutModal && <WorkoutModal userId={userId} />}
+        {showWorkoutHistoryModal && <WorkoutHistoryModal 
+        // should be the array of completed workouts where the user id matches the user id of the user selected
+        
+          completedWorkouts={
+            completedWorkouts?.find((workout) => workout.id === userId)?.completedWorkouts
+          }
+        />}
         {!userSelected && (
           <div className="flex flex-col items-center justify-center">
             <h1 className="text-4xl text-white font-bold">
@@ -239,6 +248,18 @@ const Home: NextPage = () => {
                 </div>
               </div>
             ))}
+
+            {/* button to open workout history modal */}
+            <button 
+              className="h-12 w-full bg-gray-700 text-white rounded-sm hover:bg-gray-600"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowWorkoutHistoryModal(!showWorkoutHistoryModal);
+              }}
+            >
+              View my workout history
+            </button>
+
           </div>
         </div>}
       </main>
