@@ -24,27 +24,55 @@ export default function WorkoutHistoryModal({ completedWorkouts }: Props) {
   console.log(completedWorkouts);
   return (
     <div
-      className="fixed top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-black bg-opacity-50"
+      className="fixed top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-black bg-opacity-70"
       onClick={(e) => {
         e.preventDefault();
         setShowWorkoutHistoryModal(!showWorkoutHistoryModal);
       }}
     >
-      <div className="z-30 flex h-auto w-full max-w-md flex-col items-center justify-center rounded bg-gray-700 py-5 px-2 text-white"
+      <div className="z-30 flex h-auto w-full max-w-md flex-col items-center justify-center rounded bg-gray-700 py-5 px-2 mx-4 text-white"
         onClick={(e) => {
             e.stopPropagation();
         }}
       >
         <div className="text-xl font-bold">Workout History</div>
+        {/* close btn */}
+        <div className="absolute top-0 right-0 mt-2 mr-2">
+          <button
+            className="h-8 w-8 bg-gray-600 rounded-full hover:bg-gray-500"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowWorkoutHistoryModal(!showWorkoutHistoryModal);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-8 text-white "
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        
         <div className="flex flex-col items-center justify-center space-y-2 w-full 
             overflow-y-auto max-h-96 px-2
         ">
           {completedWorkouts?.map((workout: Workout, index) => {
             return (
-              <div key={index} className="transition-all grid grid-cols-12 w-full p-3 bg-gray-600 hover:bg-gray-700 rounded-sm">
+              <div key={index} className="transition-all grid grid-cols-12 w-full p-3 bg-gray-600 hover:bg-gray-700 rounded-sm items-center">
                 <div className="text-md col-span-4 font-bold">{workout.title}</div>
-                <div className="text-sm col-span-5">{workout.completedAt?.toDateString()}</div>
-                <div className={`text-sm col-span-3  p-1  text-center rounded-sm bg-opacity-30
+                <div className="text-sm col-span-4">{
+                workout.completedAt?.toDateString().split(" ").slice(1, 3).join(" ")
+                }</div>
+                <div className={`text-sm col-span-4  p-1  text-center rounded-sm bg-opacity-30
                     ${workout.status === "completed" ? "bg-green-500" : "bg-red-500"}
                 `}>{workout.status}</div>
                 {/* <div className="col-span-12">

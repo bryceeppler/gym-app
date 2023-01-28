@@ -81,7 +81,7 @@ const Home: NextPage = () => {
         <meta name="description" content="A simple workout tracker for the Onslaught program." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b p-4 from-[#121b36] to-[#161621]">
+      <main className="flex min-h-screen h-full flex-col items-center justify-center bg-gradient-to-b p-4 from-[#121b36] to-[#161621]">
         {showWorkoutModal && <WorkoutModal userId={userId} />}
         {showWorkoutHistoryModal && completedWorkouts && <WorkoutHistoryModal 
         // should be the array of completed workouts where the user id matches the user id of the user selected
@@ -233,7 +233,7 @@ const Home: NextPage = () => {
                       <div
                         //
                         key={i}
-                        className={`h-8 w-8 bg-opacity-50 hover:bg-opacity-60 transition-all rounded-sm ${workout.status === "completed" && workout.title === "Cold plunge" ? "bg-blue-500" : workout.status === "completed" ? "bg-green-600" : workout.status === "placeholder" ? "bg-gray-300" : "bg-red-500"} ${i > 4 ? "hidden md:flex" : ""}`} 
+                        className={`h-8 w-8 bg-opacity-50 hover:bg-opacity-60 transition-all rounded-sm ${workout.status === "completed" && workout.title === "Cold plunge" ? "bg-blue-500" : workout.status === "completed" ? "bg-green-600" : workout.status === "placeholder" ? "bg-gray-300" : "bg-red-500"} ${i < 4 ? "hidden md:flex" : ""}`} 
                       ></div>
                     ))
                   }

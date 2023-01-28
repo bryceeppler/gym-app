@@ -38,18 +38,43 @@ export default function WorkoutModal({userId}: Props) {
     }, [selectedWorkout]);
   return (
     <div
-      className="fixed top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-black bg-opacity-50"
+      className="fixed top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-black bg-opacity-70"
       onClick={(e) => {
         e.preventDefault();
         setShowWorkoutModal(!showWorkoutModal);
       }}
     >
-      <div className="z-30 flex h-auto w-full max-w-md flex-col items-center justify-center rounded bg-gray-700 text-white py-5 px-2"
+      <div className="z-30 flex h-auto w-full max-w-md flex-col items-center justify-center rounded bg-gray-700 text-white py-5 px-2 mx-4"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
         }
       }>
+                {/* close btn */}
+                <div className="absolute top-0 right-0 mt-2 mr-2">
+          <button
+            className="h-8 w-8 bg-gray-600 rounded-full hover:bg-gray-500"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowWorkoutModal(!showWorkoutModal);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-8 text-white "
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
         {/* print workout_str including the newlines */}
         <div className="text-xl font-bold">{selectedWorkout.title}</div>
         <div className="text-sm">
