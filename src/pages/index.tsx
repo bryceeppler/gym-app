@@ -81,7 +81,7 @@ const Home: NextPage = () => {
         <meta name="description" content="A simple workout tracker for the Onslaught program." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen h-full flex-col items-center justify-center bg-gradient-to-b p-4 from-[#121b36] to-[#161621]">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b p-4 from-[#121b36] to-[#161621]">
         {showWorkoutModal && <WorkoutModal userId={userId} />}
         {showWorkoutHistoryModal && completedWorkouts && <WorkoutHistoryModal 
         // should be the array of completed workouts where the user id matches the user id of the user selected
@@ -134,8 +134,7 @@ const Home: NextPage = () => {
                   i === 4 ? "hidden md:flex" : "" }`}
                 key={i}
                 onClick={
-                  i === 0
-                    ? (e) => {
+                (e) => {
                         console.log("setting");
                         console.log("workout", workout);
                         console.log("selectedWorkout", selectedWorkout);
@@ -147,7 +146,6 @@ const Home: NextPage = () => {
                           workout_str: workout.workout_str || "",
                         });
                       }
-                    : (e) => e.preventDefault()
                 }
               >
                 {/* first line of workout_str */}
@@ -155,7 +153,7 @@ const Home: NextPage = () => {
                 <div className="text-right opacity-60">
                   {
                     // i days after today
-                    new Date(today.getTime() + (i + 1) * 24 * 60 * 60 * 1000)
+                    new Date(today.getTime() + (i) * 24 * 60 * 60 * 1000)
                       .toDateString()
                       .split(" ")
                       .slice(1, 3)
@@ -168,7 +166,7 @@ const Home: NextPage = () => {
 
           {/* stats cards */}
           <div className="col-span-8 h-auto md:col-span-2">
-            <div className="mb-4 flex h-24 w-full items-center rounded-sm bg-gray-800 p-4 text-white hover:bg-gray-700">
+            <div className="mb-4 flex h-24 w-full items-center rounded-sm bg-gray-800 p-4 text-white">
               {/* img placeholder */}
               {/* <div className="h-16 w-16 bg-gray-200"></div> */}
               <img
@@ -183,7 +181,7 @@ const Home: NextPage = () => {
                 <div className="text-sm">cold plunges</div>
               </div>
             </div>
-            <div className="mb-4 flex h-24 w-full items-center rounded-sm bg-gray-800 p-4 text-white hover:bg-gray-700">
+            <div className="mb-4 flex h-24 w-full items-center rounded-sm bg-gray-800 p-4 text-white">
               {/* img placeholder */}
               <img
                 className="h-16 w-16 object-contain"
@@ -197,7 +195,7 @@ const Home: NextPage = () => {
                 <div className="text-sm">workouts complete</div>
               </div>
             </div>
-            <div className="mb-4 flex h-24 w-full items-center rounded-sm bg-gray-800 p-4 text-white hover:bg-gray-700">
+            <div className="mb-4 flex h-24 w-full items-center rounded-sm bg-gray-800 p-4 text-white">
               {/* img placeholder */}
               <img
                 className="h-16 w-16 object-contain"

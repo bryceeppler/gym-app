@@ -77,21 +77,18 @@ export default function WorkoutModal({userId}: Props) {
         </div>
         {/* print workout_str including the newlines */}
         <div className="text-xl font-bold">{selectedWorkout.title}</div>
-        <div className="text-sm">
-          {
-            // todays date
-            today.toDateString().split(" ").slice(1, 3).join(" ")
-          }
-        </div>
+
         {/* Workout description */}
-        <div className="text-sm mt-4 overflow-y-scroll h-96 w-full space-y-1 p-2">
+        {selectedWorkout?.workout_str?.length?
+         (<div className="text-sm mt-4 overflow-y-scroll max-h-96 w-full space-y-1 p-2">
           {
             // print workout_str including the newlines
             selectedWorkout.workout_str?.split("\n").map((line, i) => (
               <div key={i}>{line}</div>
             ))
           }
-        </div>
+        </div>): ""
+}
         <div className="flex flex-row items-center justify-center space-x-2">
           <button
             className="my-4 rounded bg-red-600 p-2 text-white transition-all hover:bg-red-500"
