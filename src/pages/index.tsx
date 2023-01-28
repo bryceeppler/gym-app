@@ -170,7 +170,7 @@ const Home: NextPage = () => {
               {/* img placeholder */}
               {/* <div className="h-16 w-16 bg-gray-200"></div> */}
               <img
-                className="h-16 w-16 object-contain"
+                className="h-14 w-14 object-contain"
                 src="https://i.ibb.co/2PTBdkx/vecteezy-ice-cube-clipart-design-illustration-9384604-666.png"
                 alt="ice cube"
               />
@@ -184,7 +184,7 @@ const Home: NextPage = () => {
             <div className="mb-4 flex h-24 w-full items-center rounded-sm bg-gray-800 p-4 text-white">
               {/* img placeholder */}
               <img
-                className="h-16 w-16 object-contain"
+                className="h-14 w-14 object-contain"
                 src="https://i.ibb.co/hddnKLZ/Png-Item-2747104.png"
                 alt="fire"
               />
@@ -198,7 +198,7 @@ const Home: NextPage = () => {
             <div className="mb-4 flex h-24 w-full items-center rounded-sm bg-gray-800 p-4 text-white">
               {/* img placeholder */}
               <img
-                className="h-16 w-16 object-contain"
+                className="h-14 w-14 object-contain"
                 src="https://i.ibb.co/0qjGNcc/Png-Item-38127.png"
                 alt="skip"
               />
