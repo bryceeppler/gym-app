@@ -229,11 +229,11 @@ const Home: NextPage = () => {
                     // if workout.status = skipped color = red
                     // if workout.status = completed AND workout.title = "Cold plunge" color = blue
                     // map out the LAST 7 workouts
-                    user.completedWorkouts.slice(-10).map((workout, i) => (
+                    user.completedWorkouts.slice(-6).map((workout, i) => (
                       <div
                         //
                         key={i}
-                        className={`h-8 w-8 bg-opacity-50 hover:bg-opacity-60 transition-all rounded-sm ${workout.status === "completed" && workout.title === "Cold plunge" ? "bg-blue-500" : workout.status === "completed" ? "bg-green-600" : workout.status === "placeholder" ? "bg-gray-300" : "bg-red-500"} ${i < 4 ? "hidden md:flex" : ""}`} 
+                        className={`h-8 w-8 bg-opacity-50 hover:bg-opacity-60 transition-all rounded-sm ${workout.status === "completed" && workout.title === "Cold plunge" ? "bg-blue-500" : workout.status === "completed" ? "bg-green-600" : workout.status === "placeholder" ? "bg-gray-300" : "bg-red-500"}`} 
                       ></div>
                     ))
                   }
