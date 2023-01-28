@@ -216,7 +216,7 @@ const Home: NextPage = () => {
           {/* completed workouts */}
           <div className="col-span-8 mb-4 flex h-auto flex-col space-y-4 bg-gray-800 p-4 text-white md:col-span-6">
             {users?.map((user, i) => (
-              <div className="mt-4 h-auto w-full justify-center px-4" key={user.id}>
+              <div className="mt-4 h-full w-full justify-center px-4" key={user.id}>
                 <div className="flex flex-row items-center space-x-0.5 ">
                   <div className="flex flex-col">
                   <div className="w-20 text-md font-bold">{user.username}</div>
@@ -233,17 +233,17 @@ const Home: NextPage = () => {
                       <div
                         //
                         key={i}
-                        className={`h-8 w-8 ${workout.status === "completed" && workout.title === "Cold plunge" ? "bg-blue-500" : workout.status === "completed" ? "bg-green-600" : "bg-red-600"} ${i > 4 ? "hidden md:flex" : ""}`} 
+                        className={`h-8 w-8 bg-opacity-50 hover:bg-opacity-60 transition-all rounded-sm ${workout.status === "completed" && workout.title === "Cold plunge" ? "bg-blue-500" : workout.status === "completed" ? "bg-green-600" : workout.status === "placeholder" ? "bg-gray-300" : "bg-red-500"} ${i > 4 ? "hidden md:flex" : ""}`} 
                       ></div>
                     ))
                   }
                 </div>
               </div>
             ))}
-
+            <div className="my-auto"/>
             {/* button to open workout history modal */}
             <button 
-              className="h-12 w-full bg-gray-700 text-white rounded-sm hover:bg-gray-600"
+              className="w-full bg-gray-700 py-4 text-white rounded-sm hover:bg-gray-600"
               onClick={(e) => {
                 e.preventDefault();
                 setShowWorkoutHistoryModal(!showWorkoutHistoryModal);
