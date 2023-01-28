@@ -2,11 +2,24 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { api } from "../utils/api";
 import { useEffect, useState } from "react";
-// zustand
 import { useWorkoutModalStore } from "../store";
 import WorkoutModal from "../components/workoutModal";
 import HeaderCard from "../components/HeaderCard";
 import WorkoutHistoryModal from "../components/WorkoutHistoryModal";
+
+
+// define types
+interface Workout {
+  id: number;
+  completedAt: Date | null;
+  title: string | null;
+  userId: number;
+  workoutId: number;
+  status: string;
+}
+
+
+
 const Home: NextPage = () => {
   const {
     showWorkoutModal,
@@ -37,7 +50,7 @@ const Home: NextPage = () => {
   });
 
   const {
-    data: completedWorkouts,
+    data: users,
   } = api.example.getCompletedWorkouts.useQuery();
 
   const {
@@ -54,6 +67,15 @@ const Home: NextPage = () => {
     console.log("userScores", userScores);
   }, [userScores]);
 
+  const {
+    data: completedWorkouts,
+  } = api.workout.getCompletedWorkouts.useQuery(
+    { id: userId },
+  );
+  
+  // check type of completedWorkouts
+  const userCompletedWorkouts: typeof completedWorkouts = completedWorkouts as Workout[];
+
   const today = new Date();
 
   return (
@@ -65,12 +87,11 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b p-4 from-[#121b36] to-[#161621]">
         {showWorkoutModal && <WorkoutModal userId={userId} />}
-        {showWorkoutHistoryModal && <WorkoutHistoryModal 
+        {showWorkoutHistoryModal && completedWorkouts && <WorkoutHistoryModal 
         // should be the array of completed workouts where the user id matches the user id of the user selected
         
-          completedWorkouts={
-            completedWorkouts?.find((workout) => workout.id === userId)?.completedWorkouts
-          }
+          completedWorkouts={userCompletedWorkouts}
+          
         />}
         {!userSelected && (
           <div className="flex flex-col items-center justify-center">
@@ -87,6 +108,7 @@ const Home: NextPage = () => {
                       setUserSelected(true)}
                     
                     }
+                    key={user.id}
                     className="bg-blue-500 text-white rounded p-2"
                   >
                     {user.username}
@@ -111,14 +133,9 @@ const Home: NextPage = () => {
             {workoutData?.slice(0, 5).map((workout, i) => (
               <div
                 // if workout.workout_str?.split(" ")[0] === "Cold" we want bg color to be blue
-                className={`flex h-24 w-full flex-col justify-between rounded ${
-                  workout.title === "Cold plunge"
-                    ? "bg-blue-500 p-3 text-white hover:bg-blue-400"
-                    : "bg-gray-800 p-3 text-white hover:bg-gray-600"
-                } ${i === 0 && "border-4 border-blue-500"} ${
-                  // if size < md, and index = 4, hide
-                  i === 4 ? "hidden md:flex" : ""
-                }`}
+                className={`flex h-24 w-full flex-col justify-between rounded ${ workout.title === "Cold plunge" ? "bg-blue-500 p-3 text-white hover:bg-blue-400" : "bg-gray-800 p-3 text-white hover:bg-gray-600" } ${i === 0 ? "border-4 border-blue-500" : ""} ${ 
+                  // if size < md, and index = 4, hide 
+                  i === 4 ? "hidden md:flex" : "" }`}
                 key={i}
                 onClick={
                   i === 0
@@ -201,8 +218,8 @@ const Home: NextPage = () => {
 
           {/* completed workouts */}
           <div className="col-span-8 mb-4 flex h-auto flex-col space-y-4 bg-gray-800 p-4 text-white md:col-span-6">
-            {completedWorkouts?.map((user, i) => (
-              <div className="mt-4 h-auto w-full justify-center px-4">
+            {users?.map((user, i) => (
+              <div className="mt-4 h-auto w-full justify-center px-4" key={user.id}>
                 <div className="flex flex-row items-center space-x-0.5 ">
                   <div className="flex flex-col">
                   <div className="w-20 text-md font-bold">{user.username}</div>
@@ -218,17 +235,8 @@ const Home: NextPage = () => {
                     user.completedWorkouts.slice(-10).map((workout, i) => (
                       <div
                         //
-                        className={`h-8 w-8 ${
-                          workout.status === "completed" &&
-                          workout.title === "Cold plunge"
-                            ? "bg-blue-500"
-                            : workout.status === "completed"
-                            ? "bg-green-600"
-                            : "bg-red-600"
-                        } ${
-                          // if size < md, and index > 5, hide
-                          i > 4 && "hidden md:flex"
-                        }`}
+                        key={i}
+                        className={`h-8 w-8 ${workout.status === "completed" && workout.title === "Cold plunge" ? "bg-blue-500" : workout.status === "completed" ? "bg-green-600" : "bg-red-600"} ${i > 4 ? "hidden md:flex" : ""}`} 
                       ></div>
                     ))
                   }

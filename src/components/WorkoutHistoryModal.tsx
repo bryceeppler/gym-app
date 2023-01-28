@@ -1,8 +1,21 @@
 import React from "react";
 import { useWorkoutModalStore } from "../store";
 
+interface Workout {
+  id: number;
+  completedAt: Date | null;
+  title: string | null;
+  userId: number;
+  workoutId: number;
+  status: string | null;
+}
+// this is what gets passed in as props
+// const userCompletedWorkouts: typeof completedWorkouts = completedWorkouts as Workout[];
+
+// so we need our props to look like
+
 type Props = {
-  completedWorkouts: any;
+  completedWorkouts: Workout[];
 };
 
 export default function WorkoutHistoryModal({ completedWorkouts }: Props) {
@@ -26,11 +39,11 @@ export default function WorkoutHistoryModal({ completedWorkouts }: Props) {
         <div className="flex flex-col items-center justify-center space-y-2 w-full 
             overflow-y-auto max-h-96
         ">
-          {completedWorkouts?.map((workout: { title: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; completedAt: { toDateString: () => string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }; status: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | null | undefined; }) => {
+          {completedWorkouts?.map((workout: Workout, index) => {
             return (
-              <div className="transition-all grid grid-cols-12 w-full p-3 bg-gray-600 hover:bg-gray-700 rounded-sm">
+              <div key={index} className="transition-all grid grid-cols-12 w-full p-3 bg-gray-600 hover:bg-gray-700 rounded-sm">
                 <div className="text-md col-span-4 font-bold">{workout.title}</div>
-                <div className="text-sm col-span-5">{workout.completedAt.toDateString()}</div>
+                <div className="text-sm col-span-5">{workout.completedAt?.toDateString()}</div>
                 <div className={`text-sm col-span-3  p-1  text-center rounded-sm bg-opacity-30
                     ${workout.status === "completed" ? "bg-green-500" : "bg-red-500"}
                 `}>{workout.status}</div>

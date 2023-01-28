@@ -27,10 +27,14 @@ export default function WorkoutModal({userId}: Props) {
     {
       onSuccess: () => {
         // invalidate query to update the UI
-        utils.example.getUncompletedWorkouts.invalidate();
-        utils.example.getUserStats.invalidate();
-        utils.example.getCompletedWorkouts.invalidate();
-        utils.example.getAllUserScores.invalidate();
+        utils.example.getUncompletedWorkouts.invalidate()
+        .catch((err) => console.log(err));
+        utils.example.getUserStats.invalidate()
+        .catch((err) => console.log(err));
+        utils.example.getCompletedWorkouts.invalidate()
+        .catch((err) => console.log(err));
+        utils.example.getAllUserScores.invalidate()
+        .catch((err) => console.log(err));
       },
     }
   );
