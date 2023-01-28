@@ -8,26 +8,27 @@ datasource db {
 }
 
 model users {
-  id       Int     @id @default(autoincrement())
-  username String? @db.VarChar
+  id                Int                 @id @default(autoincrement())
+  username          String?             @db.VarChar
   completedWorkouts completedWorkouts[]
 }
 
 model workouts {
-  id             Int         @id @default(autoincrement())
-  completedAt    DateTime?
-  title          String?     @db.VarChar
+  id                Int                 @id @default(autoincrement())
+  completedAt       DateTime?
+  title             String?             @db.VarChar
+  workout_number    Int?
+  workout_str       String?             @db.VarChar
   completedWorkouts completedWorkouts[]
 }
 
 model completedWorkouts {
-  id             Int         @id @default(autoincrement())
-  completedAt    DateTime?    @default(now())
-  title          String?     @db.VarChar
-  user           users       @relation(fields: [userId], references: [id])
-  userId         Int
-  workoutId      Int        
-  workout        workouts   @relation(fields: [workoutId], references: [id])
-  // status = skipped or completed
-  status         String?     @db.VarChar
+  id          Int       @id @default(autoincrement())
+  completedAt DateTime? @default(now())
+  title       String?   @db.VarChar
+  userId      Int
+  workoutId   Int
+  status      String?   @db.VarChar
+  user        users     @relation(fields: [userId], references: [id])
+  workout     workouts  @relation(fields: [workoutId], references: [id])
 }

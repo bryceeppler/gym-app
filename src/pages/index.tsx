@@ -16,6 +16,7 @@ interface Workout {
   userId: number;
   workoutId: number;
   status: string;
+  workout_str: string | null;
 }
 
 
@@ -62,10 +63,6 @@ const Home: NextPage = () => {
   } = api.example.getAllUsers.useQuery();
 
   const [userSelected, setUserSelected] = useState(false);
-
-  useEffect(() => {
-    console.log("userScores", userScores);
-  }, [userScores]);
 
   const {
     data: completedWorkouts,
