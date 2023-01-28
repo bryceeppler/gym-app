@@ -106,7 +106,7 @@ export default function WorkoutModal({userId}: Props) {
               // utils.example.getUncompletedWorkouts.invalidate();
             }}
           >
-            Skip workout
+            Skip
           </button>
           <button
             className="my-4 rounded bg-blue-600 p-2 text-white transition-all hover:bg-blue-500"
@@ -122,7 +122,7 @@ export default function WorkoutModal({userId}: Props) {
               setShowWorkoutModal(!showWorkoutModal);
             }}
           >
-            Complete workout
+            Complete
           </button>
         </div>
       </div>
