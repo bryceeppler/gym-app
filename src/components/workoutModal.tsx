@@ -1,4 +1,3 @@
-import React from "react";
 // zustand store
 import { useWorkoutModalStore } from "../store";
 import { api } from "../utils/api";
@@ -13,7 +12,6 @@ export default function WorkoutModal({userId}: Props) {
     showWorkoutModal,
     setShowWorkoutModal,
     selectedWorkout,
-    setSelectedWorkout,
   } = useWorkoutModalStore();
   const today = new Date();
 

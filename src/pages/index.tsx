@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { api } from "../utils/api";
 import { useEffect, useState } from "react";
 // zustand
@@ -21,44 +20,32 @@ const Home: NextPage = () => {
 
   const {
     data: userData,
-    isLoading,
-    error,
   } = api.example.getUser.useQuery({
     id: userId,
   });
 
   const {
     data: workoutData,
-    isLoading: isLoading2,
-    error: error2,
   } = api.example.getUncompletedWorkouts.useQuery({
     id: userId,
   });
 
   const {
     data: userStats,
-    isLoading: userStatsLoading,
-    error: userStatsError,
   } = api.example.getUserStats.useQuery({
     id: userId,
   });
 
   const {
     data: completedWorkouts,
-    isLoading: completedWorkoutsLoading,
-    error: completedWorkoutsError,
   } = api.example.getCompletedWorkouts.useQuery();
 
   const {
     data: userScores,
-    isLoading: userScoresLoading,
-    error: userScoresError,
   } = api.example.getAllUserScores.useQuery();
 
   const {
     data: allUsers,
-    isLoading: allUsersLoading,
-    error: allUsersError,
   } = api.example.getAllUsers.useQuery();
 
   const [userSelected, setUserSelected] = useState(false);
@@ -130,7 +117,7 @@ const Home: NextPage = () => {
                     : "bg-gray-800 p-3 text-white hover:bg-gray-600"
                 } ${i === 0 && "border-4 border-blue-500"} ${
                   // if size < md, and index = 4, hide
-                  i === 4 && "hidden md:flex"
+                  i === 4 ? "hidden md:flex" : ""
                 }`}
                 key={i}
                 onClick={
