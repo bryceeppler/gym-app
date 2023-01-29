@@ -91,7 +91,7 @@ export default function WorkoutModal({userId}: Props) {
 }
         <div className="flex flex-row items-center justify-center space-x-2">
           <button
-            className="my-4 rounded bg-red-600 p-2 text-white transition-all hover:bg-red-500"
+            className="my-4 rounded bg-red-400 p-2 text-white transition-all hover:bg-red-500"
             onClick={(e) => {
               e.preventDefault();
               setShowWorkoutModal(!showWorkoutModal);
@@ -109,7 +109,7 @@ export default function WorkoutModal({userId}: Props) {
             Skip
           </button>
           <button
-            className="my-4 rounded bg-blue-600 p-2 text-white transition-all hover:bg-blue-500"
+            className="my-4 rounded bg-lightpurple p-2 text-white transition-all hover:bg-blue-500"
             onClick={(e) => {
               e.preventDefault();
               completeWorkout.mutate({

@@ -81,7 +81,7 @@ const Home: NextPage = () => {
         <meta name="description" content="A simple workout tracker for the Onslaught program." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b p-4 from-[#121b36] to-[#161621]">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b p-4 bg-darkgray">
         {showWorkoutModal && <WorkoutModal userId={userId} />}
         {showWorkoutHistoryModal && completedWorkouts && <WorkoutHistoryModal 
         // should be the array of completed workouts where the user id matches the user id of the user selected
@@ -105,7 +105,7 @@ const Home: NextPage = () => {
                     
                     }
                     key={user.id}
-                    className="bg-blue-500 text-white rounded p-2"
+                    className="bg-iceblue text-white rounded p-2"
                   >
                     {user.username}
                   </button>
@@ -126,10 +126,10 @@ const Home: NextPage = () => {
 
           {/* workout cards */}
           <div className="col-span-8 flex h-24 flex-row items-center justify-center space-x-4 md:col-span-6">
-            {workoutData?.slice(0, 5).map((workout, i) => (
+            {workoutData?.slice(0, 4).map((workout, i) => (
               <div
-                // if workout.workout_str?.split(" ")[0] === "Cold" we want bg color to be blue
-                className={`flex h-24 w-full flex-col justify-between rounded ${ workout.title === "Cold plunge" ? "bg-blue-500 p-3 text-white hover:bg-blue-400" : "bg-gray-800 p-3 text-white hover:bg-gray-600" } ${i === 0 ? "border-4 border-blue-500" : ""} ${ 
+                // if workout.title === "cold plunge" we want to set this as the background https://bryces-images.s3.us-west-2.amazonaws.com/cold-bg.png
+                className={`transition-all flex h-24 w-full flex-col justify-between rounded ${ workout.title === "Cold plunge" ? "bg-iceblue text-white hover:mix-blend-screen" : "bg-paper text-white hover:bg-[#33374B]" } ${i === 0 ? "border-4 border-lightgreen" : ""} ${ 
                   // if size < md, and index = 4, hide 
                   i >= 3 ? "hidden md:flex" : "" }`}
                 key={i}
@@ -148,9 +148,17 @@ const Home: NextPage = () => {
                       }
                 }
               >
+                {/* if it's cold plunge, set this as the background to cover the parent div */}
+                {/* https://bryces-images.s3.us-west-2.amazonaws.com/cold-bg.png */}
+                {
+                 workout.title === "Cold plunge" &&
+                    <img src="https://bryces-images.s3.us-west-2.amazonaws.com/cold-bg.png" className="w-full h-full object-cover rounded-md" />
+                  
+                }
                 {/* first line of workout_str */}
-                <div>{workout.title}</div>
-                <div className="text-right opacity-60">
+                <div className="p-3 text-left absolute">
+                <div className=" text-sm font-semibold">{workout.title}</div>
+                <div className="opacity-60 text-sm">
                   {
                     // i days after today
                     new Date(today.getTime() + (i) * 24 * 60 * 60 * 1000)
@@ -160,59 +168,60 @@ const Home: NextPage = () => {
                       .join(" ")
                   }
                 </div>
+                </div>
               </div>
             ))}
           </div>
 
           {/* stats cards */}
           <div className="col-span-8 h-auto md:col-span-2">
-            <div className="mb-4 flex h-24 w-full items-center rounded-sm bg-gray-800 p-4 text-white">
+            <div className="mb-4 flex h-20 w-full items-center rounded-md border-2 border-paper p-4 text-white">
               {/* img placeholder */}
               {/* <div className="h-16 w-16 bg-gray-200"></div> */}
               <img
-                className="h-14 w-14 object-contain"
-                src="https://i.ibb.co/2PTBdkx/vecteezy-ice-cube-clipart-design-illustration-9384604-666.png"
+                className="h-10 w-10 object-contain"
+                src="https://bryces-images.s3.us-west-2.amazonaws.com/cold.png"
                 alt="ice cube"
               />
               <div className="ml-4 flex flex-col">
-                <div className="text-3xl font-bold text-white">
+                <div className="text-2xl font-bold text-white">
                   {userStats?.coldPlunges}
                 </div>
-                <div className="text-sm">cold plunges</div>
+                <div className="text-sm text-gray-400">cold plunges</div>
               </div>
             </div>
-            <div className="mb-4 flex h-24 w-full items-center rounded-sm bg-gray-800 p-4 text-white">
+            <div className="mb-4 flex h-20 w-full items-center rounded-md border-2 border-paper p-4 text-white">
               {/* img placeholder */}
               <img
-                className="h-14 w-14 object-contain"
-                src="https://i.ibb.co/hddnKLZ/Png-Item-2747104.png"
+                className="h-10 w-10 object-contain"
+                src="https://bryces-images.s3.us-west-2.amazonaws.com/workout.png"
                 alt="fire"
               />
               <div className="ml-4 flex flex-col">
-                <div className="text-3xl font-bold text-white">
+                <div className="text-2xl font-bold text-white">
                   {userStats?.workoutsCompleted}
                 </div>
-                <div className="text-sm">workouts complete</div>
+                <div className="text-sm text-gray-400">workouts</div>
               </div>
             </div>
-            <div className="mb-4 flex h-24 w-full items-center rounded-sm bg-gray-800 p-4 text-white">
+            <div className="mb-4 flex h-20 w-full items-center rounded-md border-2 border-paper p-4 text-white">
               {/* img placeholder */}
               <img
-                className="h-14 w-14 object-contain"
-                src="https://i.ibb.co/0qjGNcc/Png-Item-38127.png"
+                className="h-10 w-10 object-contain"
+                src="https://bryces-images.s3.us-west-2.amazonaws.com/skip.png"
                 alt="skip"
               />
               <div className="ml-4 flex flex-col">
-                <div className="text-3xl font-bold text-white">
+                <div className="text-2xl font-bold text-white">
                   {userStats?.workoutsSkipped}
                 </div>
-                <div className="text-sm">skipped</div>
+                <div className="text-sm text-gray-400">skipped</div>
               </div>
             </div>
           </div>
 
           {/* completed workouts */}
-          <div className="col-span-8 mb-4 flex h-auto flex-col space-y-4 bg-gray-800 p-4 text-white md:col-span-6">
+          <div className="col-span-8 mb-4 flex h-auto flex-col space-y-4 p-4 text-white md:col-span-4">
             {users?.map((user, i) => (
               <div className="mt-4 h-full w-full justify-center px-4" key={user.id}>
                 <div className="flex flex-row items-center space-x-0.5 ">
@@ -231,7 +240,7 @@ const Home: NextPage = () => {
                       <div
                         //
                         key={i}
-                        className={`h-8 w-8 bg-opacity-50 hover:bg-opacity-60 transition-all rounded-sm ${workout.status === "completed" && workout.title === "Cold plunge" ? "bg-blue-500" : workout.status === "completed" ? "bg-green-600" : workout.status === "placeholder" ? "bg-gray-300" : "bg-red-500"}`} 
+                        className={`h-8 w-8 bg-opacity-50 hover:bg-opacity-60 transition-all rounded-sm ${workout.status === "completed" && workout.title === "Cold plunge" ? "bg-iceblue" : workout.status === "completed" ? "bg-lightpurple" : workout.status === "placeholder" ? "bg-gray-300" : "bg-lightyellow"}`} 
                       ></div>
                     ))
                   }
@@ -239,17 +248,26 @@ const Home: NextPage = () => {
               </div>
             ))}
             <div className="my-auto"/>
-            {/* button to open workout history modal */}
-            <button 
-              className="w-full bg-gray-700 py-4 text-white rounded-sm hover:bg-gray-600"
+            <div className="flex flex-row space-x-2 justify-center">
+
+            </div>
+
+
+
+          </div>
+          <div className="col-span-8 md:col-span-2 mb-4 flex flex-col space-y-3 h-auto pt-8 px-4 w-full">
+          <button className=" text-sm transition-all bg-iceblue py-3 hover:bg-blue-400 rounded w-full">+ Cold</button>
+            <button className=" text-sm transition-all bg-iceblue py-3 hover:bg-blue-400 rounded">+ Cardio</button>
+                        {/* button to open workout history modal */}
+                        <button 
+              className="w-full bg-paper rounded py-3 text-white  hover:bg-gray-600 w-full"
               onClick={(e) => {
                 e.preventDefault();
                 setShowWorkoutHistoryModal(!showWorkoutHistoryModal);
               }}
             >
-              View my workout history
+              History
             </button>
-
           </div>
         </div>}
       </main>
