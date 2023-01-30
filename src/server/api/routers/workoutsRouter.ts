@@ -8,4 +8,21 @@ export const workoutsRouter = createTRPCRouter({
         return ctx.prisma.workouts.findMany();
     }),
 
+    getIncompleteWorkouts: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.workouts.findMany({
+        where: {
+          completedWorkouts: {
+            every: {
+              userId: {
+                not: input.id,
+              },
+            },
+          },
+        },
+      });
+    }),
+        
+
 });
