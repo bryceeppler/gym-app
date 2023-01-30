@@ -4,6 +4,7 @@ import Link from "next/link";
 import UpcomingWorkouts from "../../components/UpcomingWorkouts";
 import Stats from "../../components/Stats";
 import Progress from "../../components/Progress";
+import Sidebar from "../../components/Sidebar";
 type Props = {
   uid: number;
 };
@@ -28,18 +29,18 @@ export default function UserDashboard({ uid }: Props) {
           <div className="h-12 w-12 rounded bg-paper transition-colors hover:bg-baselight" />
         </div>
         {/* div should have max height and max width with padding 4 */}
-        <div className=" min-h-screen w-full rounded bg-baselight p-4">
+        <div className=" min-h-screen w-full rounded bg-baselight p-6">
           <div className="grid grid-cols-12 gap-4">
             {/* main section */}
-            <div className="col-span-12 min-h-screen bg-paper md:col-span-8">
+            <div className="col-span-12 min-h-screen md:col-span-8 space-y-8">
               <UpcomingWorkouts />
               <Stats />
               <Progress />
             </div>
 
             {/* right sidebar */}
-            <div className="col-span-12 min-h-screen bg-paper md:col-span-4">
-              <div className="font-bold text-white">Right Sidebar</div>
+            <div className="col-span-12 min-h-screen bg-paper md:col-span-4 p-8">
+              <Sidebar />
             </div>
           </div>
         </div>
