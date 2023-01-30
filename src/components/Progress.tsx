@@ -1,9 +1,10 @@
 import React from 'react'
 import HistoryGrid from './HistoryGrid'
 
-type Props = {}
+// type Props = {}
 
-export default function Progress({}: Props) {
+// export default function Progress({}: Props) {
+  export default function Progress() {
   return (
     <div className="flex flex-col text-left">
       <div className="my-2 text-lg font-bold text-white">Progress</div>

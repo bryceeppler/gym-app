@@ -15,7 +15,6 @@ model users {
 
 model workouts {
   id                Int                 @id @default(autoincrement())
-  completedAt       DateTime?
   title             String?             @db.VarChar
   workout_number    Int?
   workout_str       String?             @db.VarChar
@@ -24,7 +23,7 @@ model workouts {
 
 model completedWorkouts {
   id          Int       @id @default(autoincrement())
-  completedAt DateTime? @default(now())
+  date DateTime? @default(now())
   title       String?   @db.VarChar
   userId      Int
   workoutId   Int

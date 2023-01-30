@@ -1,8 +1,9 @@
 import React from "react";
 
-type Props = {};
+// type Props = {};
 
-export default function UpcomingWorkouts({}: Props) {
+// export default function UpcomingWorkouts({}: Props) {
+  export default function UpcomingWorkouts() {
   return (
     <div className="flex flex-col text-left">
       <div className="my-2 text-lg font-bold text-white">Upcoming</div>

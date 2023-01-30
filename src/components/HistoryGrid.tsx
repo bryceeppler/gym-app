@@ -1,8 +1,10 @@
 import React from "react";
+// type Props = {
 
-type Props = {};
+// };
 
-export default function HistoryGrid({}: Props) {
+// export default function HistoryGrid({}: Props) {
+export default function HistoryGrid() {
   const i = 45;
   return (
     <div className="flex flex-col text-white">

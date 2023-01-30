@@ -1,8 +1,18 @@
 import React from "react";
 
-type Props = {};
+type Props = {
+  coldPlunges?: number;
+  cardioSessions?: number;
+  workouts?: number;
+  skipped?: number;
+};
 
-export default function Stats({}: Props) {
+export default function Stats({
+  coldPlunges,
+  cardioSessions,
+  workouts,
+  skipped,
+}: Props) {
   return (
     <div className="flex flex-col text-left">
       <div className="my-2 text-lg font-bold text-white">Stats</div>
@@ -12,7 +22,7 @@ export default function Stats({}: Props) {
             className="w-8 h-auto mr-4"
           />
           <div className="flex flex-col">
-            <div className="font-bold ">5</div>
+            <div className="font-bold ">{coldPlunges || 0}</div>
             <div className="text-sm text-gray-400">cold plunges</div>
           </div>
         </div>
@@ -21,7 +31,7 @@ export default function Stats({}: Props) {
             className="w-8 h-auto mr-4"
           />
           <div className="flex flex-col">
-            <div className="font-bold ">5</div>
+            <div className="font-bold ">{cardioSessions || 0}</div>
             <div className="text-sm text-gray-400">cardio sessions</div>
           </div>
         </div>        <div className="flex w-full flex-row rounded bg-paper p-4 text-white transition-colors hover:bg-base">
@@ -29,7 +39,7 @@ export default function Stats({}: Props) {
             className="w-8 h-auto mr-4"
           />
           <div className="flex flex-col">
-            <div className="font-bold ">5</div>
+            <div className="font-bold ">{workouts || 0}</div>
             <div className="text-sm text-gray-400">workouts</div>
           </div>
         </div>        <div className="flex w-full flex-row rounded bg-paper p-4 text-white transition-colors hover:bg-base">
@@ -37,7 +47,7 @@ export default function Stats({}: Props) {
             className="w-8 h-auto mr-4"
           />
           <div className="flex flex-col">
-            <div className="font-bold ">5</div>
+            <div className="font-bold ">{skipped || 0}</div>
             <div className="text-sm text-gray-400">skipped</div>
           </div>
         </div>

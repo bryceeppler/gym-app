@@ -1,8 +1,9 @@
 import React from 'react'
 
-type Props = {}
+// type Props = {}
 
-export default function Sidebar({}: Props) {
+// export default function Sidebar({}: Props) {
+  export default function Sidebar() {
   return (
     <div className="flex flex-col gap-4">
     <div className="text-white text-lg font-bold">eppler97</div>

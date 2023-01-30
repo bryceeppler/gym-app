@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import UpcomingWorkouts from "../../components/UpcomingWorkouts";
 import Stats from "../../components/Stats";
 import Progress from "../../components/Progress";
 import Sidebar from "../../components/Sidebar";
 import { api } from "../../utils/api";
+import { useEffect, useState } from "react";
 
 interface Workout {
   id: number;
@@ -35,12 +34,30 @@ type Props = {
 };
 
 export default function UserDashboard({ uid }: Props) {
-  // fetch all user data with completed workouts
-  const { data:userList} = api.users.getUserList.useQuery();
 
-  const { data:workoutList } = api.workouts.getWorkoutList.useQuery();
+    // fetch all user data with completed workouts
+    const { data:userList} = api.users.getUserList.useQuery();
 
+    const { data:workoutList } = api.workouts.getWorkoutList.useQuery();
 
+    // const [incompleteWorkouts, setIncompleteWorkouts] = useState([]);
+    let incompleteWorkouts = [];
+
+  useEffect(() => {
+    if (userList && workoutList) {
+      const user = userList.find((user) => user.id === uid);
+      console.log("current user:")
+      console.log(user?.username)
+      const completedWorkouts = user?.completedWorkouts;
+      const completedWorkoutIds = completedWorkouts?.map(
+        (workout) => workout.workoutId
+      );
+      incompleteWorkouts = workoutList.filter(
+        (workout) => !completedWorkoutIds?.includes(workout.id)
+      );
+      console.log(incompleteWorkouts);
+    }
+  }, [userList, workoutList]);
   return (
     <>
       <Head>
@@ -64,10 +81,13 @@ export default function UserDashboard({ uid }: Props) {
           <div className="grid grid-cols-12 gap-4">
             {/* main section */}
             <div className="col-span-12 min-h-screen lg:col-span-8 space-y-8">
-              <UpcomingWorkouts 
-              // workoutList is all the workouts in workoutList that do not appear in the user's completedWorkouts
+              <UpcomingWorkouts />
+              <Stats 
+                coldPlunges={4}
+                cardioSessions={2}
+                workouts={5}
+                skipped={2}
               />
-              <Stats />
               <Progress />
             </div>
 
@@ -82,7 +102,8 @@ export default function UserDashboard({ uid }: Props) {
   );
 }
 
-export async function getServerSideProps(context: { params: { uid: number } }) {
+export async function getServerSideProps(context: { params: { uid: number } }) { 
+
   return {
     props: {
       uid: context.params.uid,
