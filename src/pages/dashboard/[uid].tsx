@@ -45,12 +45,24 @@ export default function UserDashboard({ uid }: Props) {
                 workouts={incompleteWorkouts}
               />
               <Stats 
-                coldPlunges={4}
-                cardioSessions={2}
-                workouts={5}
-                skipped={2}
+                coldPlunges={
+                  // number of user.completedWorkouts where workout.title === "Cold Plunge" and status === "completed"
+                  userList?.find((user) => user.id === uid)?.completedWorkouts.filter((workout) => workout.title === "Cold Plunge" && workout.status === "completed").length
+                }
+                cardioSessions={
+                  // number of user.completedWorkouts where workout.title === "Cardio" and status === "completed"
+                  userList?.find((user) => user.id === uid)?.completedWorkouts.filter((workout) => workout.title === "Cardio" && workout.status === "completed").length
+                }
+                workouts={userList?.find((user) => user.id ===uid)?.completedWorkouts.length}
+                skipped={
+                  // number of user.completedWorkouts where status === "skipped"
+                  userList?.find((user) => user.id === uid)?.completedWorkouts.filter((workout) => workout.status === "skipped").length
+                }
               />
-              <Progress />
+              <Progress 
+                workouts={workoutList}
+                users={userList}
+              />
             </div>
 
             {/* right sidebar */}
