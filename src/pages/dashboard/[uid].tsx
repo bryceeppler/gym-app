@@ -1,18 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import UpcomingWorkouts from "../../components/UpcomingWorkouts";
 import Stats from "../../components/Stats";
 import Progress from "../../components/Progress";
 import Sidebar from "../../components/Sidebar";
+import { api } from "../../utils/api";
+
+interface Workout {
+  id: number;
+  title: string;
+  completedAt?: Date;
+  workout_number: number;
+  workout_str: string;
+}
+
+interface CompletedWorkout {
+  id: number;
+  completedAt?: Date;
+  title: string;
+  userId: number;
+  workoutId: number;
+  status: string;
+}
+
+interface User {
+  id: number;
+  username: string;
+  completedWorkouts: CompletedWorkout[];
+}
+
 type Props = {
   uid: number;
 };
 
 export default function UserDashboard({ uid }: Props) {
   // fetch all user data with completed workouts
+  const { data:userList} = api.users.getUserList.useQuery();
 
-  // fetch all workout data
+  const { data:workoutList } = api.workouts.getWorkoutList.useQuery();
+
+
   return (
     <>
       <Head>
@@ -36,7 +64,9 @@ export default function UserDashboard({ uid }: Props) {
           <div className="grid grid-cols-12 gap-4">
             {/* main section */}
             <div className="col-span-12 min-h-screen lg:col-span-8 space-y-8">
-              <UpcomingWorkouts />
+              <UpcomingWorkouts 
+              // workoutList is all the workouts in workoutList that do not appear in the user's completedWorkouts
+              />
               <Stats />
               <Progress />
             </div>
