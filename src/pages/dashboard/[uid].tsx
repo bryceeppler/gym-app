@@ -3,7 +3,9 @@ import UpcomingWorkouts from "../../components/UpcomingWorkouts";
 import Stats from "../../components/Stats";
 import Progress from "../../components/Progress";
 import Sidebar from "../../components/Sidebar";
+import { useWorkoutModalStore } from "../../store";
 import { api } from "../../utils/api";
+import WorkoutModal from "../../components/WorkoutModal";
 
 type Props = {
   uid: number;
@@ -11,12 +13,14 @@ type Props = {
 
 export default function UserDashboard({ uid }: Props) {
 
+    const { showWorkoutModal } = useWorkoutModalStore();
     // fetch all user data with completed workouts
     const { data:userList} = api.users.getUserList.useQuery();
 
     const { data:workoutList } = api.workouts.getWorkoutList.useQuery();
 
     const { data:incompleteWorkouts, isLoading } = api.workouts.getIncompleteWorkouts.useQuery({id:uid})
+
 
   return (
     <>
@@ -29,6 +33,7 @@ export default function UserDashboard({ uid }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-row justify-center bg-base p-4 gap-4">
+        {showWorkoutModal && <WorkoutModal userId={uid} />}
         {/* navbar placeholder */}
         <div className="hidden h-full w-16 flex-col items-center justify-center lg:flex">
           {/* <img src="/favicon.ico" className="h-12 w-12 rounded bg-paper" /> */}
@@ -45,19 +50,10 @@ export default function UserDashboard({ uid }: Props) {
                 workouts={incompleteWorkouts}
               />
               <Stats 
-                coldPlunges={
-                  // number of user.completedWorkouts where workout.title === "Cold Plunge" and status === "completed"
-                  userList?.find((user) => user.id === uid)?.completedWorkouts.filter((workout) => workout.title === "Cold Plunge" && workout.status === "completed").length
-                }
-                cardioSessions={
-                  // number of user.completedWorkouts where workout.title === "Cardio" and status === "completed"
-                  userList?.find((user) => user.id === uid)?.completedWorkouts.filter((workout) => workout.title === "Cardio" && workout.status === "completed").length
-                }
+                coldPlunges={userList?.find((user) => user.id === uid)?.completedWorkouts.filter((workout) => workout.title === "Cold Plunge" && workout.status === "completed").length}
+                cardioSessions={userList?.find((user) => user.id === uid)?.completedWorkouts.filter((workout) => workout.title === "Cardio" && workout.status === "completed").length}
                 workouts={userList?.find((user) => user.id ===uid)?.completedWorkouts.length}
-                skipped={
-                  // number of user.completedWorkouts where status === "skipped"
-                  userList?.find((user) => user.id === uid)?.completedWorkouts.filter((workout) => workout.status === "skipped").length
-                }
+                skipped={userList?.find((user) => user.id === uid)?.completedWorkouts.filter((workout) => workout.status === "skipped").length}
               />
               <Progress 
                 workouts={workoutList}
