@@ -23,23 +23,26 @@ export default function UserDashboard({ uid }: Props) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen flex-row justify-center bg-base p-4">
+      <main className="flex min-h-screen flex-row justify-center bg-base p-4 gap-4">
         {/* navbar placeholder */}
-        <div className="hidden h-full w-16 flex-col items-center justify-center md:flex">
-          <div className="h-12 w-12 rounded bg-paper transition-colors hover:bg-baselight" />
+        <div className="hidden h-full w-16 flex-col items-center justify-center lg:flex">
+          {/* <img src="/favicon.ico" className="h-12 w-12 rounded bg-paper" /> */}
+          <div className="h-12 w-12 rounded bg-paper transition-colors hover:bg-baselight flex justify-center items-center">
+            <img src="/favicon.ico" className="h-5 w-5" />
+          </div>
         </div>
         {/* div should have max height and max width with padding 4 */}
         <div className=" min-h-screen w-full rounded bg-baselight p-6">
           <div className="grid grid-cols-12 gap-4">
             {/* main section */}
-            <div className="col-span-12 min-h-screen md:col-span-8 space-y-8">
+            <div className="col-span-12 min-h-screen lg:col-span-8 space-y-8">
               <UpcomingWorkouts />
               <Stats />
               <Progress />
             </div>
 
             {/* right sidebar */}
-            <div className="col-span-12 min-h-screen bg-paper md:col-span-4 p-8">
+            <div className="col-span-12 min-h-screen bg-paper lg:col-span-4 p-8">
               <Sidebar />
             </div>
           </div>
