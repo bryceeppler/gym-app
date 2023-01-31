@@ -21,7 +21,7 @@ const Home: NextPage = () => {
               <Link href="/dashboard/1">eppler97</Link>
             </button>
             <button className="m-2 rounded-full bg-white py-2 px-4 font-bold text-black transition-colors hover:bg-gray-200">
-              <Link href={`/dashboard/2`}>eppler98</Link>
+              <Link href={`/dashboard/2`}>Padfoot</Link>
             </button>
           </div>
         </div>

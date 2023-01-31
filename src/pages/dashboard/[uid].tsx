@@ -39,7 +39,7 @@ export default function UserDashboard({ uid }: Props) {
         <div className="hidden h-full w-16 flex-col items-center justify-center lg:flex">
           {/* <img src="/favicon.ico" className="h-12 w-12 rounded bg-paper" /> */}
           <div className="h-12 w-12 rounded bg-paper transition-colors hover:bg-baselight flex justify-center items-center">
-            <img src="/favicon.ico" className="h-5 w-5" />
+            <img src="/favicon.ico" className="h-4 w-4" />
           </div>
         </div>
         {/* div should have max height and max width with padding 4 */}
