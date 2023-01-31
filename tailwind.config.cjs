@@ -10,7 +10,11 @@ module.exports = {
         darkpurple: "#4E3A8D",
         lightgreen: "#87C28A",
         iceblue: "#649EC8",
-        lightyellow: "#FFD47F"
+        lightyellow: "#FFD47F",
+        base: "#1E1E3B",
+        baselight: "#2C2C51",
+        paper: "#38375E",
+        coldblue:"#6C7EAA",
       },
     },
     fontFamily: {

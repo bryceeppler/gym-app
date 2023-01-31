@@ -11,20 +11,22 @@ model users {
   id                Int                 @id @default(autoincrement())
   username          String?             @db.VarChar
   completedWorkouts completedWorkouts[]
+  icePlunges        icePlunge[]
+  cardioSessions    cardioSession[]
 }
 
 model workouts {
   id                Int                 @id @default(autoincrement())
-  completedAt       DateTime?
   title             String?             @db.VarChar
   workout_number    Int?
   workout_str       String?             @db.VarChar
+  date              DateTime
   completedWorkouts completedWorkouts[]
 }
 
 model completedWorkouts {
   id          Int       @id @default(autoincrement())
-  completedAt DateTime? @default(now())
+  date DateTime? @default(now())
   title       String?   @db.VarChar
   userId      Int
   workoutId   Int
@@ -32,3 +34,21 @@ model completedWorkouts {
   user        users     @relation(fields: [userId], references: [id])
   workout     workouts  @relation(fields: [workoutId], references: [id])
 }
+
+model icePlunge {
+  id        Int     @id @default(autoincrement())
+  date      DateTime? @default(now())
+  duration  Int?
+  userId    Int
+  user      users   @relation(fields: [userId], references: [id])
+}
+
+model cardioSession {
+  id        Int     @id @default(autoincrement())
+  date      DateTime? @default(now())
+  duration  Int?
+  userId    Int
+  user      users   @relation(fields: [userId], references: [id])
+}
+
+

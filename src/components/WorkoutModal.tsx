@@ -4,7 +4,7 @@ import { useWorkoutModalStore } from "../store";
 import { api } from "../utils/api";
 
 type Props = {
-  userId: number;
+    userId: number;
 };
 
 export default function WorkoutModal({userId}: Props) {
@@ -15,20 +15,17 @@ export default function WorkoutModal({userId}: Props) {
     selectedWorkout,
   } = useWorkoutModalStore();
   const today = new Date();
-  const completeWorkout = api.example.completeWorkout.useMutation(
+  const completeWorkout = api.workouts.completeWorkout.useMutation(
     {
       onSuccess: () => {
         // invalidate query to update the UI
-        utils.example.getUncompletedWorkouts.invalidate()
+        utils.workouts.getIncompleteWorkouts.invalidate()
         .catch((err) => console.log(err));
-        utils.example.getUserStats.invalidate()
+        utils.users.getUserList.invalidate()
         .catch((err) => console.log(err));
-        utils.example.getCompletedWorkouts.invalidate()
-        .catch((err) => console.log(err));
-        utils.example.getAllUserScores.invalidate()
-        .catch((err) => console.log(err));
-        utils.workout.getCompletedWorkouts.invalidate()
-        .catch((err) => console.log(err));
+        // utils.example.getUncompletedWorkouts.invalidate()
+        // .catch((err) => console.log(err));
+
       },
     }
   );
@@ -44,7 +41,7 @@ export default function WorkoutModal({userId}: Props) {
         setShowWorkoutModal(!showWorkoutModal);
       }}
     >
-      <div className="z-30 flex h-auto w-full max-w-md flex-col items-center justify-center rounded bg-gray-700 text-white py-5 px-2 mx-4"
+      <div className="z-30 flex h-auto w-full max-w-md flex-col items-center justify-center rounded bg-base text-white py-5 px-2 mx-4"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -80,12 +77,13 @@ export default function WorkoutModal({userId}: Props) {
 
         {/* Workout description */}
         {selectedWorkout?.workout_str?.length?
-         (<div className="text-sm mt-4 overflow-y-scroll max-h-96 w-full space-y-1 p-2">
+         (
+        //  whitespace
+
+         <div className="text-sm mt-4 overflow-y-scroll max-h-96 w-full space-y-1 p-2 whitespace-pre-wrap">
           {
-            // print workout_str including the newlines
-            selectedWorkout.workout_str?.split("\n").map((line, i) => (
-              <div key={i}>{line}</div>
-            ))
+            <div>{selectedWorkout.workout_str}</div>
+              
           }
         </div>): ""
 }
@@ -101,9 +99,6 @@ export default function WorkoutModal({userId}: Props) {
                 title: selectedWorkout.title || "",
                 userId: userId,
               });
-              // invalidate query to update the UI
-              // utils.example.getUncompletedWorkouts.invalidate();
-              // utils.example.getUncompletedWorkouts.invalidate();
             }}
           >
             Skip
