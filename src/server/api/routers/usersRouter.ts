@@ -8,7 +8,9 @@ export const usersRouter = createTRPCRouter({
         return ctx.prisma.users.findMany(
             {
                 include: {
-                    completedWorkouts: true
+                    completedWorkouts: true,
+                    icePlunges: true,
+                    cardioSessions: true,
                 }
             }
         )

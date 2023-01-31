@@ -1,14 +1,14 @@
 import React from "react";
 
 type Props = {
-  coldPlunges?: number;
+  icePlunges?: number;
   cardioSessions?: number;
   workouts?: number;
   skipped?: number;
 };
 
 export default function Stats({
-  coldPlunges,
+  icePlunges,
   cardioSessions,
   workouts,
   skipped,
@@ -22,7 +22,7 @@ export default function Stats({
             className="w-8 h-auto mr-4"
           />
           <div className="flex flex-col">
-            <div className="font-bold ">{coldPlunges || 0}</div>
+            <div className="font-bold ">{icePlunges || 0}</div>
             <div className="text-sm text-gray-400">cold plunges</div>
           </div>
         </div>

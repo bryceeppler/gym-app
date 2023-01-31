@@ -21,6 +21,7 @@ export default function UserDashboard({ uid }: Props) {
 
     const { data:incompleteWorkouts, isLoading } = api.workouts.getIncompleteWorkouts.useQuery({id:uid})
 
+      console.log(userList)
 
   return (
     <>
@@ -50,14 +51,20 @@ export default function UserDashboard({ uid }: Props) {
                 workouts={incompleteWorkouts}
               />
               <Stats 
-                coldPlunges={userList?.find((user) => user.id === uid)?.completedWorkouts.filter((workout) => workout.title === "Cold Plunge" && workout.status === "completed").length}
-                cardioSessions={userList?.find((user) => user.id === uid)?.completedWorkouts.filter((workout) => workout.title === "Cardio" && workout.status === "completed").length}
+                icePlunges={userList?.find((user) => user.id === uid)?.icePlunges.length}
+                cardioSessions={userList?.find((user) => user.id === uid)?.cardioSessions.length}
                 workouts={userList?.find((user) => user.id ===uid)?.completedWorkouts.length}
                 skipped={userList?.find((user) => user.id === uid)?.completedWorkouts.filter((workout) => workout.status === "skipped").length}
               />
               <Progress 
                 workouts={workoutList}
                 users={userList}
+                completedWorkouts1={userList?.find((user) => user.id === 1)?.completedWorkouts}
+                completedWorkouts2={userList?.find((user) => user.id === 2)?.completedWorkouts}
+                icePlunges1={userList?.find((user) => user.id === 1)?.icePlunges}
+                icePlunges2={userList?.find((user) => user.id === 2)?.icePlunges}
+                cardioSessions1={userList?.find((user) => user.id === 1)?.cardioSessions}
+                cardioSessions2={userList?.find((user) => user.id === 2)?.cardioSessions}
               />
             </div>
 

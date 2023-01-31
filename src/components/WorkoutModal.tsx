@@ -15,16 +15,20 @@ export default function WorkoutModal({userId}: Props) {
     selectedWorkout,
   } = useWorkoutModalStore();
   const today = new Date();
-//   const completeWorkout = api.example.completeWorkout.useMutation(
-//     {
-//       onSuccess: () => {
-//         // invalidate query to update the UI
-//         // utils.example.getUncompletedWorkouts.invalidate()
-//         // .catch((err) => console.log(err));
+  const completeWorkout = api.workouts.completeWorkout.useMutation(
+    {
+      onSuccess: () => {
+        // invalidate query to update the UI
+        utils.workouts.getIncompleteWorkouts.invalidate()
+        .catch((err) => console.log(err));
+        utils.users.getUserList.invalidate()
+        .catch((err) => console.log(err));
+        // utils.example.getUncompletedWorkouts.invalidate()
+        // .catch((err) => console.log(err));
 
-//       },
-//     }
-//   );
+      },
+    }
+  );
 
     useEffect(() => {
       console.log("selectedWorkout", selectedWorkout);
@@ -89,15 +93,12 @@ export default function WorkoutModal({userId}: Props) {
             onClick={(e) => {
               e.preventDefault();
               setShowWorkoutModal(!showWorkoutModal);
-            //   completeWorkout.mutate({
-            //     id: selectedWorkout.id,
-            //     status: "skipped",
-            //     title: selectedWorkout.title || "",
-            //     userId: userId,
-            //   });
-              // invalidate query to update the UI
-              // utils.example.getUncompletedWorkouts.invalidate();
-              // utils.example.getUncompletedWorkouts.invalidate();
+              completeWorkout.mutate({
+                id: selectedWorkout.id,
+                status: "skipped",
+                title: selectedWorkout.title || "",
+                userId: userId,
+              });
             }}
           >
             Skip
@@ -106,12 +107,12 @@ export default function WorkoutModal({userId}: Props) {
             className="my-4 rounded bg-lightpurple p-2 text-white transition-all hover:bg-blue-500"
             onClick={(e) => {
               e.preventDefault();
-            //   completeWorkout.mutate({
-            //     id: selectedWorkout.id,
-            //     status: "completed",
-            //     title: selectedWorkout.title || "",
-            //     userId: userId,
-            //   });
+              completeWorkout.mutate({
+                id: selectedWorkout.id,
+                status: "completed",
+                title: selectedWorkout.title || "",
+                userId: userId,
+              });
 
               setShowWorkoutModal(!showWorkoutModal);
             }}
