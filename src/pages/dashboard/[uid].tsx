@@ -79,7 +79,7 @@ export default function UserDashboard({ uid }: Props) {
   );
 }
 
-export async function getServerSideProps(context: { params: { uid: number } }) { 
+export function getServerSideProps(context: { params: { uid: number } }) { 
     // uid is coming as a string, need to convert to number
     const uid = Number(context.params.uid);
   return {

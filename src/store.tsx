@@ -18,6 +18,7 @@ export const useWorkoutModalStore = create<State>((set) => ({
     showWorkoutModal: false,
     setShowWorkoutModal: (showWorkoutModal) => set({ showWorkoutModal }),
     selectedWorkout: {
+        date: new Date(),
         title: '',
         id: 0,
         workout_str: '',
