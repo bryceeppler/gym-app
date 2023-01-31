@@ -3,9 +3,7 @@ This is an experiment - creating a gym competition app for two users using creat
 
 `npm run dev`
 
-![image](https://user-images.githubusercontent.com/65413229/215118875-239372e5-d93d-42fb-8df8-de2434fb841d.png)
-![image](https://user-images.githubusercontent.com/65413229/215118931-41334b69-e8ba-4d1f-b2fe-c00501c6d686.png)
-
+<img width="1725" alt="image" src="https://user-images.githubusercontent.com/65413229/215643850-52cb8ebc-4a58-4124-9671-872cbd7f9bdb.png">
 
 If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
