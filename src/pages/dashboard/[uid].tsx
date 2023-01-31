@@ -15,7 +15,7 @@ type Props = {
 
 export default function UserDashboard({ uid }: Props) {
 
-    const { showWorkoutModal, setUserId, showActivityModal } = useWorkoutModalStore();
+    const { showWorkoutModal, setUserId, showActivityModal, setCurrentUser } = useWorkoutModalStore();
     // fetch all user data with completed workouts
     const { data:userList} = api.users.getUserList.useQuery()
 
@@ -24,7 +24,17 @@ export default function UserDashboard({ uid }: Props) {
     const { data:incompleteWorkouts, isLoading } = api.workouts.getIncompleteWorkouts.useQuery({id:uid})
 
     useEffect(() => {
-      userList && userList.find((user) => user.id === uid) && setUserId(uid);
+      // userList && userList.find((user) => user.id === uid) ? () => {
+      //   setUserId(uid) && setCurrentUser(userList.find((user) => user.id === uid));
+      // } : () => {
+      //   console.log("ppo"")
+      if (userList) {
+        if (userList.find((user) => user.id === uid)) {
+          setUserId(uid) 
+          // setCurrentUser(userList.find((user) => user.id === uid));
+        }
+      }
+        
     }, [userList]);
 
   return (
@@ -75,7 +85,7 @@ export default function UserDashboard({ uid }: Props) {
 
             {/* right sidebar */}
             <div className="col-span-12 lg:min-h-screen bg-paper lg:col-span-4 p-8">
-              <Sidebar user={userList?.find((user) => user.id === uid)} />
+              <Sidebar user={userList?.find((user) => user.id === uid)} cardioSessions={userList?.find((user) => user.id === uid)?.cardioSessions} icePlunges={userList?.find((user) => user.id === uid)?.icePlunges}/>
             </div>
           </div>
         </div>

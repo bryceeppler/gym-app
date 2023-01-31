@@ -1,6 +1,6 @@
 // zustand in typescript
 import {create} from 'zustand'
-import { workouts } from '@prisma/client'
+import { users, workouts } from '@prisma/client'
 type State = {
     showWorkoutModal: boolean
     setShowWorkoutModal: (showWorkoutModal: boolean) => void
@@ -12,7 +12,8 @@ type State = {
     setShowWorkoutHistoryModal: (showWorkoutHistoryModal: boolean) => void
     userId: number
     setUserId: (userId: number) => void
-
+    currentUser: users
+    setCurrentUser: (currentUser: users) => void
 
 }
 
@@ -32,7 +33,15 @@ export const useWorkoutModalStore = create<State>((set) => ({
     showWorkoutHistoryModal: false,
     setShowWorkoutHistoryModal: (showWorkoutHistoryModal) => set({ showWorkoutHistoryModal }),
     userId: 0,
-    setUserId: (userId) => set({ userId })
+    setUserId: (userId) => set({ userId }),
+    currentUser: {
+        id: 0,
+        username: '',
+        completedWorkouts: [],
+        icePlunges:[],
+        cardioSessions: []
+    },
+    setCurrentUser: (currentUser) => set({ currentUser })
 
 }))
 
