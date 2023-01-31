@@ -69,8 +69,8 @@ export default function UserDashboard({ uid }: Props) {
             </div>
 
             {/* right sidebar */}
-            <div className="col-span-12 min-h-screen bg-paper lg:col-span-4 p-8">
-              <Sidebar />
+            <div className="col-span-12 lg:min-h-screen bg-paper lg:col-span-4 p-8">
+              <Sidebar user={userList?.find((user) => user.id === uid)} />
             </div>
           </div>
         </div>

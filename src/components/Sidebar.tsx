@@ -1,9 +1,12 @@
 import React from 'react'
 import { api } from "../utils/api";
-// type Props = {}
+import { users } from '@prisma/client';
+type Props = {
+  user?: users;
+}
 
-// export default function Sidebar({}: Props) {
-  export default function Sidebar() {
+export default function Sidebar({user}: Props) {
+  // export default function Sidebar() {
     const createIcePlunge = api.users.createIcePlunge.useMutation(
       {
         onSuccess: () => {
@@ -15,7 +18,7 @@ import { api } from "../utils/api";
     );
   return (
     <div className="flex flex-col gap-4">
-    <div className="text-white text-lg font-bold">eppler97</div>
+    <div className="text-white text-lg font-bold">{user?.username}</div>
     <button className="transition-colors bg-coldblue hover:bg-opacity-60 w-full text-white py-4 font-bold text-sm rounded">
         Cold plunge
     </button>
