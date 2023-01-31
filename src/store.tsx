@@ -4,6 +4,8 @@ import { workouts } from '@prisma/client'
 type State = {
     showWorkoutModal: boolean
     setShowWorkoutModal: (showWorkoutModal: boolean) => void
+    showActivityModal: boolean
+    setShowActivityModal: (showActivityModal: boolean) => void
     selectedWorkout: workouts
     setSelectedWorkout: (selectedWorkout: workouts) => void
     showWorkoutHistoryModal: boolean
@@ -16,6 +18,8 @@ type State = {
 
 export const useWorkoutModalStore = create<State>((set) => ({
     showWorkoutModal: false,
+    showActivityModal: false,
+    setShowActivityModal: (showActivityModal) => set({ showActivityModal }),
     setShowWorkoutModal: (showWorkoutModal) => set({ showWorkoutModal }),
     selectedWorkout: {
         date: new Date(),

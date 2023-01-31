@@ -3,9 +3,11 @@ import UpcomingWorkouts from "../../components/UpcomingWorkouts";
 import Stats from "../../components/Stats";
 import Progress from "../../components/Progress";
 import Sidebar from "../../components/Sidebar";
+import ActivityModal from "../../components/ActivityModal";
 import { useWorkoutModalStore } from "../../store";
 import { api } from "../../utils/api";
 import WorkoutModal from "../../components/WorkoutModal";
+import { useEffect } from "react";
 
 type Props = {
   uid: number;
@@ -13,15 +15,17 @@ type Props = {
 
 export default function UserDashboard({ uid }: Props) {
 
-    const { showWorkoutModal } = useWorkoutModalStore();
+    const { showWorkoutModal, setUserId, showActivityModal } = useWorkoutModalStore();
     // fetch all user data with completed workouts
-    const { data:userList} = api.users.getUserList.useQuery();
+    const { data:userList} = api.users.getUserList.useQuery()
 
     const { data:workoutList } = api.workouts.getWorkoutList.useQuery();
 
     const { data:incompleteWorkouts, isLoading } = api.workouts.getIncompleteWorkouts.useQuery({id:uid})
 
-      console.log(userList)
+    useEffect(() => {
+      userList && userList.find((user) => user.id === uid) && setUserId(uid);
+    }, [userList]);
 
   return (
     <>
@@ -34,7 +38,8 @@ export default function UserDashboard({ uid }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-row justify-center bg-base p-4 gap-4">
-        {showWorkoutModal && <WorkoutModal userId={uid} />}
+        {showWorkoutModal && <WorkoutModal />}
+        {showActivityModal && <ActivityModal />}
         {/* navbar placeholder */}
         <div className="hidden h-full w-16 flex-col items-center justify-center lg:flex">
           {/* <img src="/favicon.ico" className="h-12 w-12 rounded bg-paper" /> */}

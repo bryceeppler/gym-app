@@ -10,6 +10,7 @@ type Props = {
   export default function UpcomingWorkouts({ workouts }: Props) {
 
   const { setShowWorkoutModal, setSelectedWorkout } = useWorkoutModalStore();
+  console.log("workouts", workouts)
   return (
     <div className="flex flex-col text-left">
       <div className="my-2 text-lg font-bold text-white">Upcoming</div>
@@ -26,7 +27,8 @@ type Props = {
               }
             >
               <div className="font-bold ">{workout.title}</div>
-              <div className="text-sm text-gray-400">Date</div>
+              {/* Date should be format "Feb 24" */}
+              <div className="text-sm text-gray-400">{workout.date.toLocaleDateString('default', { month: 'short', day: 'numeric' })}</div>
             </div>
           );
         })}

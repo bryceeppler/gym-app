@@ -16,13 +16,29 @@ export const usersRouter = createTRPCRouter({
   createIcePlunge: publicProcedure
     // accept a workout id and user id and create a completedWorkout entry with the given status
     // return the completedWorkout entry
-    .input(z.object({ uid: z.number(), duration: z.number() }))
+    .input(z.object({ uid: z.number(), duration: z.number(), date: z.date() }))
     .mutation(async ({ ctx, input }) => {
       try {
         await ctx.prisma.icePlunge.create({
           data: {
             userId: input.uid,
             duration: input.duration,
+            date: input.date,
+          },
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }),
+    createCardioSession: publicProcedure
+    .input(z.object({ uid: z.number(), duration: z.number(), date: z.date() }))
+    .mutation(async ({ ctx, input }) => {
+      try {
+        await ctx.prisma.cardioSession.create({
+          data: {
+            userId: input.uid,
+            duration: input.duration,
+            date: input.date,
           },
         });
       } catch (err) {

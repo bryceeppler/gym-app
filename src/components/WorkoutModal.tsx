@@ -3,16 +3,18 @@ import { useEffect } from "react";
 import { useWorkoutModalStore } from "../store";
 import { api } from "../utils/api";
 
-type Props = {
-    userId: number;
-};
+// type Props = {
+//     userId: number;
+// };
 
-export default function WorkoutModal({userId}: Props) {
+// export default function WorkoutModal({userId}: Props) {
+  export default function WorkoutModal() {
   const utils = api.useContext();
   const {
     showWorkoutModal,
     setShowWorkoutModal,
     selectedWorkout,
+    userId
   } = useWorkoutModalStore();
   const today = new Date();
   const completeWorkout = api.workouts.completeWorkout.useMutation(
