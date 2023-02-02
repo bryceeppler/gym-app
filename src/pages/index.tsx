@@ -18,10 +18,13 @@ const Home: NextPage = () => {
           <h1 className="text-4xl font-bold text-white">Select a user</h1>
           <div className="flex flex-row items-center justify-center">
             <button className="m-2 rounded-full bg-white py-2 px-4 font-bold text-black transition-colors hover:bg-gray-200">
-              <Link href="/dashboard/1">eppler97</Link>
+              <Link href="/dashboard/1">bigwipes</Link>
             </button>
             <button className="m-2 rounded-full bg-white py-2 px-4 font-bold text-black transition-colors hover:bg-gray-200">
               <Link href={`/dashboard/2`}>Padfoot</Link>
+            </button>
+            <button className="m-2 rounded-full bg-white py-2 px-4 font-bold text-black transition-colors hover:bg-gray-200">
+              <Link href={`/dashboard/3`}>DangerJones</Link>
             </button>
           </div>
         </div>
