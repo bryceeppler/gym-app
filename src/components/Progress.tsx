@@ -7,13 +7,16 @@ type Props = {
   users?: users[];
   completedWorkouts1?: completedWorkouts[];
   completedWorkouts2?: completedWorkouts[];
+  completedWorkouts3?: completedWorkouts[];
   icePlunges1?: icePlunge[];
   icePlunges2?: icePlunge[];
+  icePlunges3?: icePlunge[];
   cardioSessions1?: cardioSession[];
   cardioSessions2?: cardioSession[];
+  cardioSessions3?: cardioSession[];
 }
 
-export default function Progress({workouts, users, completedWorkouts1, completedWorkouts2, icePlunges1, icePlunges2, cardioSessions1, cardioSessions2}: Props) {
+export default function Progress({workouts, users, completedWorkouts1, completedWorkouts2, completedWorkouts3, icePlunges1, icePlunges2, icePlunges3, cardioSessions1, cardioSessions2, cardioSessions3}: Props) {
   // export default function Progress() {
     console.log(users)
   return (
@@ -25,6 +28,9 @@ export default function Progress({workouts, users, completedWorkouts1, completed
         />
         <HistoryGrid completedWorkouts={completedWorkouts2} workouts={workouts} user={users?.find((user) => user.id === 2)}
           cardioSessions={cardioSessions2} icePlunges={icePlunges2}
+        />
+        <HistoryGrid completedWorkouts={completedWorkouts3} workouts={workouts} user={users?.find((user) => user.id === 3)}
+          cardioSessions={cardioSessions3} icePlunges={icePlunges3}
         />
       </div>
     </div>  )

@@ -92,17 +92,26 @@ export default function UserDashboard({ uid }: Props) {
                 completedWorkouts2={
                   userList?.find((user) => user.id === 2)?.completedWorkouts
                 }
+                completedWorkouts3={
+                  userList?.find((user) => user.id === 3)?.completedWorkouts
+                }
                 icePlunges1={
                   userList?.find((user) => user.id === 1)?.icePlunges
                 }
                 icePlunges2={
                   userList?.find((user) => user.id === 2)?.icePlunges
                 }
+                icePlunges3={
+                  userList?.find((user) => user.id === 3)?.icePlunges
+                }
                 cardioSessions1={
                   userList?.find((user) => user.id === 1)?.cardioSessions
                 }
                 cardioSessions2={
                   userList?.find((user) => user.id === 2)?.cardioSessions
+                }
+                cardioSessions3={
+                  userList?.find((user) => user.id === 3)?.cardioSessions
                 }
               />
             </div>
