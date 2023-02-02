@@ -40,6 +40,14 @@ export default function Sidebar({user, cardioSessions, icePlunges, completedWork
         </div>
         {/* map out cardiosessions, ice plunges and recently completed workouts */}
         {completedWorkouts?.map((workout) => {
+          if (workout.status === "skipped") {
+            return (
+              <div key={workout.id} className="flex flex-row justify-between p-2 w-60 mx-auto mb-1 bg-baselight rounded">
+                <div className="text-sm font-bold">{workout.title}</div>
+                <div className="text-sm text-gray-400">missed</div>
+              </div>
+            )
+          }
           return (
             <div key={workout.id} className="flex flex-row justify-between p-2 w-60 mx-auto mb-1 bg-baselight rounded">
               <div className="text-sm font-bold">{workout.title}</div>
