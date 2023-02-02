@@ -72,7 +72,9 @@ export default function UserDashboard({ uid }: Props) {
                     .length
                 }
                 workouts={
+                  // completed workouts with status "completed"
                   userList?.find((user) => user.id === uid)?.completedWorkouts
+                    .filter((workout) => workout.status === "completed")
                     .length
                 }
                 skipped={
