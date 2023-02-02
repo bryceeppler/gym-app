@@ -29,10 +29,7 @@ export default function HistoryGrid({
     const completedWorkoutsPoints = completedWorkouts?.filter((completedWorkout) => {
       return completedWorkout.status === "completed"
     }).length
-    const skippedWorkoutsPoints = completedWorkouts?.filter((completedWorkout) => {
-      return completedWorkout.status === "skipped"
-    }).length
-    const newPoints = (icePlungesPoints || 0 )+ (cardioSessionsPoints || 0 )+ (completedWorkoutsPoints || 0 )- (skippedWorkoutsPoints || 0)
+    const newPoints = (icePlungesPoints || 0 )+ (cardioSessionsPoints || 0 )+ (completedWorkoutsPoints || 0 )
     setPoints(newPoints);
   }, [icePlunges, cardioSessions, completedWorkouts]);
 
