@@ -60,7 +60,7 @@ export default function HistoryGrid({
                   completedWorkout.status === "skipped"
                 );
               }
-              ) ? "bg-red-700" : "bg-base"
+              ) ? "outline outline-1 outline-gray-500 -outline-offset-1" : "bg-base"
 
             }`}
           />
