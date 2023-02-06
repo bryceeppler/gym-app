@@ -6,7 +6,7 @@
 import psycopg2
 import datetime
 
-WORKOUT_NUM = 5
+WORKOUT_NUM = 23
 # Connect to db
 try:
     # localhost:5432 postgres postgres postgres
