@@ -5,7 +5,12 @@ import { createTRPCRouter, publicProcedure } from "../trpc";
 export const workoutsRouter = createTRPCRouter({
   getWorkoutList: publicProcedure
     .query(({ ctx }) => {
-        return ctx.prisma.workouts.findMany();
+      // return workouts sorted by earliest date first
+      return ctx.prisma.workouts.findMany({
+        orderBy: {
+          workout_number: "asc",
+        },
+      });
     }),
 
     getIncompleteWorkouts: publicProcedure
@@ -20,6 +25,9 @@ export const workoutsRouter = createTRPCRouter({
               },
             },
           },
+        },
+        orderBy: {
+          workout_number: "asc",
         },
       });
     }),

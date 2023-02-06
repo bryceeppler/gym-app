@@ -6,6 +6,7 @@ export const usersRouter = createTRPCRouter({
   getUserList: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.users.findMany({
       include: {
+        // order completedWorkouts by date asc
         completedWorkouts: true,
         icePlunges: true,
         cardioSessions: true,
