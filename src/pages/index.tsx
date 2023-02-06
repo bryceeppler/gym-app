@@ -16,7 +16,7 @@ const Home: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center justify-center bg-base bg-gradient-to-b p-4">
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-4xl font-bold text-white">Select a user</h1>
-          <div className="flex flex-row items-center justify-center">
+          <div className="flex flex-col items-center justify-center">
             <button className="m-2 rounded-full bg-white py-2 px-4 font-bold text-black transition-colors hover:bg-gray-200">
               <Link href="/dashboard/1">bigwipes</Link>
             </button>
