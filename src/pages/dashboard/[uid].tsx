@@ -8,6 +8,7 @@ import { useWorkoutModalStore } from "../../store";
 import { api } from "../../utils/api";
 import WorkoutModal from "../../components/WorkoutModal";
 import { useEffect } from "react";
+import Leaderboard from "../../components/Leaderboard";
 
 type Props = {
   uid: number;
@@ -61,7 +62,7 @@ export default function UserDashboard({ uid }: Props) {
         <div className=" min-h-screen w-full rounded bg-baselight p-6">
           <div className="grid grid-cols-12 gap-4">
             {/* main section */}
-            <div className="col-span-12 min-h-screen space-y-8 lg:col-span-8">
+            <div className="col-span-12 min-h-screen space-y-8 xl:col-span-8">
               <UpcomingWorkouts workouts={incompleteWorkouts} />
               <Stats
                 icePlunges={
@@ -73,9 +74,11 @@ export default function UserDashboard({ uid }: Props) {
                 }
                 workouts={
                   // completed workouts with status "completed"
-                  userList?.find((user) => user.id === uid)?.completedWorkouts
-                    .filter((workout) => workout.status === "completed")
-                    .length
+                  userList
+                    ?.find((user) => user.id === uid)
+                    ?.completedWorkouts.filter(
+                      (workout) => workout.status === "completed"
+                    ).length
                 }
                 skipped={
                   userList
@@ -85,37 +88,44 @@ export default function UserDashboard({ uid }: Props) {
                     ).length
                 }
               />
-              <Progress
-                workouts={workoutList}
-                users={userList}
-                completedWorkouts1={
-                  userList?.find((user) => user.id === 1)?.completedWorkouts
-                }
-                completedWorkouts2={
-                  userList?.find((user) => user.id === 2)?.completedWorkouts
-                }
-                completedWorkouts3={
-                  userList?.find((user) => user.id === 3)?.completedWorkouts
-                }
-                icePlunges1={
-                  userList?.find((user) => user.id === 1)?.icePlunges
-                }
-                icePlunges2={
-                  userList?.find((user) => user.id === 2)?.icePlunges
-                }
-                icePlunges3={
-                  userList?.find((user) => user.id === 3)?.icePlunges
-                }
-                cardioSessions1={
-                  userList?.find((user) => user.id === 1)?.cardioSessions
-                }
-                cardioSessions2={
-                  userList?.find((user) => user.id === 2)?.cardioSessions
-                }
-                cardioSessions3={
-                  userList?.find((user) => user.id === 3)?.cardioSessions
-                }
-              />
+              <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-12 xl:col-span-8">
+                  <Progress
+                    workouts={workoutList}
+                    users={userList}
+                    completedWorkouts1={
+                      userList?.find((user) => user.id === 1)?.completedWorkouts
+                    }
+                    completedWorkouts2={
+                      userList?.find((user) => user.id === 2)?.completedWorkouts
+                    }
+                    completedWorkouts3={
+                      userList?.find((user) => user.id === 3)?.completedWorkouts
+                    }
+                    icePlunges1={
+                      userList?.find((user) => user.id === 1)?.icePlunges
+                    }
+                    icePlunges2={
+                      userList?.find((user) => user.id === 2)?.icePlunges
+                    }
+                    icePlunges3={
+                      userList?.find((user) => user.id === 3)?.icePlunges
+                    }
+                    cardioSessions1={
+                      userList?.find((user) => user.id === 1)?.cardioSessions
+                    }
+                    cardioSessions2={
+                      userList?.find((user) => user.id === 2)?.cardioSessions
+                    }
+                    cardioSessions3={
+                      userList?.find((user) => user.id === 3)?.cardioSessions
+                    }
+                  />
+                </div>
+                <div className="col-span-12 lg:col-span-4">
+                  <Leaderboard />
+                </div>
+              </div>
             </div>
 
             {/* right sidebar */}

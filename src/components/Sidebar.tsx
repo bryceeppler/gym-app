@@ -39,7 +39,7 @@ export default function Sidebar({user, cardioSessions, icePlunges, completedWork
           Recently completed
         </div>
         {/* map out cardiosessions, ice plunges and recently completed workouts */}
-        {completedWorkouts?.map((workout) => {
+        {completedWorkouts?.slice(-3).reverse().map((workout) => {
           if (workout.status === "skipped") {
             return (
               <div key={workout.id} className="flex flex-row justify-between p-2 w-60 mx-auto mb-1 bg-baselight rounded">

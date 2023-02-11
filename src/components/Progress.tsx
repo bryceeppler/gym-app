@@ -18,11 +18,10 @@ type Props = {
 
 export default function Progress({workouts, users, completedWorkouts1, completedWorkouts2, completedWorkouts3, icePlunges1, icePlunges2, icePlunges3, cardioSessions1, cardioSessions2, cardioSessions3}: Props) {
   // export default function Progress() {
-    console.log(users)
   return (
     <div className="flex flex-col text-left">
       <div className="my-2 text-lg font-bold text-white">Progress</div>
-      <div className="flex flex-col gap-24 lg:flex-row w-full h-auto bg-paper p-8">
+      <div className="flex flex-col gap-24 lg:flex-row w-full h-auto bg-paper p-8 justify-center">
         <HistoryGrid completedWorkouts={completedWorkouts1} workouts={workouts} user={users?.find((user) => user.id === 1)}
           cardioSessions={cardioSessions1} icePlunges={icePlunges1}
         />

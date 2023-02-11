@@ -35,7 +35,7 @@ export default function HistoryGrid({
 
   console.log(icePlunges);
   return (
-    <div className="flex flex-col text-white">
+    <div className="flex flex-col text-white mx-auto">
       <div className="text-lg font-bold">{user?.username}</div>
       <div className="text-gray-400">{points} points</div>
       <div className="mt-2 grid h-fit w-fit grid-cols-7 gap-1">
@@ -43,7 +43,7 @@ export default function HistoryGrid({
         {workouts?.map((workout, i) => (
           <div
             key={i}
-            className={`h-4 w-4 bg-base ${
+            className={`h-3 w-3 bg-base ${
               // if there is a workout in completedWorkouts with workoutId === workout.id and status === "completed" color green
               // if it is skipped color red
               // if it is not completed or skipped color gray
