@@ -27,7 +27,7 @@ export default function Sidebar({
     <div className="flex flex-col gap-8">
       <div className="flex flex-row items-center gap-4">
         {/* img placeholder */}
-        <img src="/bigwipes.png" className="h-12 w-12 rounded-full bg-base" />        <div className="text-lg font-bold text-white">{user?.username}</div>
+        <img src={`https://robohash.org/${user?.username || "tempuser"}?set=set2`} className="h-12 w-12 rounded-full bg-base" />        <div className="text-lg font-bold text-white">{user?.username}</div>
       </div>
       <button
         className="w-28 rounded bg-indigo-500 py-2 text-sm font-bold text-white transition-colors hover:bg-opacity-60"

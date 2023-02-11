@@ -25,6 +25,8 @@ export default function UserDashboard({ uid }: Props) {
   const { data: incompleteWorkouts, isLoading } =
     api.workouts.getIncompleteWorkouts.useQuery({ id: uid });
 
+  const { data: allUserPoints } = api.users.getAllUserPoints.useQuery();
+
   useEffect(() => {
     // userList && userList.find((user) => user.id === uid) ? () => {
     //   setUserId(uid) && setCurrentUser(userList.find((user) => user.id === uid));
@@ -123,7 +125,7 @@ export default function UserDashboard({ uid }: Props) {
                   />
                 </div>
                 <div className="col-span-12 lg:col-span-4">
-                  <Leaderboard />
+                  {allUserPoints && <Leaderboard allUserPoints={allUserPoints} />}
                 </div>
               </div>
             </div>

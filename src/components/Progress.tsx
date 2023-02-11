@@ -21,7 +21,7 @@ export default function Progress({workouts, users, completedWorkouts1, completed
   return (
     <div className="flex flex-col text-left">
       <div className="my-2 text-lg font-bold text-white">Progress</div>
-      <div className="grid grid-cols-3 p-8 gap-8 w-full h-auto bg-paper justify-center">
+      <div className="grid grid-cols-3 p-8 gap-8 w-full h-auto bg-paper rounded justify-center">
 <div className="col-span-3 lg:col-span-1">
         <HistoryGrid completedWorkouts={completedWorkouts1} workouts={workouts} user={users?.find((user) => user.id === 1)}
           cardioSessions={cardioSessions1} icePlunges={icePlunges1}
