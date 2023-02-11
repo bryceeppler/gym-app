@@ -30,7 +30,7 @@ export default function Sidebar({
         <img src={`https://robohash.org/${user?.username || "tempuser"}?set=set2`} className="h-12 w-12 rounded-full bg-base" />        <div className="text-lg font-bold text-white">{user?.username}</div>
       </div>
       <button
-        className="w-28 rounded bg-indigo-500 py-2 text-sm font-bold text-white transition-colors hover:bg-opacity-60"
+        className="w-28 rounded bg-lightpurple py-2 text-sm font-bold text-white transition-colors hover:bg-opacity-60"
         onClick={() => {
           setShowActivityModal(true);
         }}
