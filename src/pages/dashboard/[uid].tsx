@@ -92,7 +92,8 @@ export default function UserDashboard({ uid }: Props) {
               />
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 xl:col-span-8">
-                  <Progress
+                  {allUserPoints && <Progress
+                    allUserPoints={allUserPoints}
                     workouts={workoutList}
                     users={userList}
                     completedWorkouts1={
@@ -122,7 +123,7 @@ export default function UserDashboard({ uid }: Props) {
                     cardioSessions3={
                       userList?.find((user) => user.id === 3)?.cardioSessions
                     }
-                  />
+                  />}
                 </div>
                 <div className="col-span-12 lg:col-span-4">
                   {allUserPoints && <Leaderboard allUserPoints={allUserPoints} />}

@@ -14,9 +14,17 @@ type Props = {
   cardioSessions1?: cardioSession[];
   cardioSessions2?: cardioSession[];
   cardioSessions3?: cardioSession[];
+  allUserPoints: {
+    userId: number;
+    totalPoints: number;
+    cardioSessionsPoints: number;
+    icePlungesPoints: number;
+    completedWorkoutsPoints: number;
+    username?: string;
+  }[];
 }
 
-export default function Progress({workouts, users, completedWorkouts1, completedWorkouts2, completedWorkouts3, icePlunges1, icePlunges2, icePlunges3, cardioSessions1, cardioSessions2, cardioSessions3}: Props) {
+export default function Progress({allUserPoints, workouts, users, completedWorkouts1, completedWorkouts2, completedWorkouts3, icePlunges1, icePlunges2, icePlunges3, cardioSessions1, cardioSessions2, cardioSessions3}: Props) {
   // export default function Progress() {
   return (
     <div className="flex flex-col text-left">
@@ -25,14 +33,17 @@ export default function Progress({workouts, users, completedWorkouts1, completed
 <div className="col-span-3 lg:col-span-1">
         <HistoryGrid completedWorkouts={completedWorkouts1} workouts={workouts} user={users?.find((user) => user.id === 1)}
           cardioSessions={cardioSessions1} icePlunges={icePlunges1}
+          userPoints={allUserPoints?.find((user) => user.userId === 1)}
         /></div>
 <div className="col-span-3 lg:col-span-1">
         <HistoryGrid completedWorkouts={completedWorkouts2} workouts={workouts} user={users?.find((user) => user.id === 2)}
           cardioSessions={cardioSessions2} icePlunges={icePlunges2}
+          userPoints={allUserPoints?.find((user) => user.userId === 2)}
         /></div>
         <div className="col-span-3 lg:col-span-1">
         <HistoryGrid completedWorkouts={completedWorkouts3} workouts={workouts} user={users?.find((user) => user.id === 3)}
           cardioSessions={cardioSessions3} icePlunges={icePlunges3}
+          userPoints={allUserPoints?.find((user) => user.userId === 3)}
         /></div>
       </div>
     </div>  )

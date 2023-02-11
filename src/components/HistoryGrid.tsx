@@ -7,6 +7,14 @@ type Props = {
   completedWorkouts?: completedWorkouts[];
   cardioSessions?: cardioSession[];
   icePlunges?: icePlunge[];
+  userPoints?: {
+    userId: number;
+    totalPoints: number;
+    cardioSessionsPoints: number;
+    icePlungesPoints: number;
+    completedWorkoutsPoints: number;
+    username?: string;
+  }
 };
 
 export default function HistoryGrid({
@@ -14,7 +22,8 @@ export default function HistoryGrid({
   user,
   completedWorkouts,
   icePlunges,
-  cardioSessions
+  cardioSessions,
+  userPoints
 }: Props) {
   const i = 45;
   const [points, setPoints] = React.useState(0);
@@ -32,7 +41,9 @@ export default function HistoryGrid({
   return (
     <div className="flex flex-col text-white mx-auto">
       <div className="text-lg font-bold">{user?.username}</div>
-      <div className="text-gray-400">{points} points</div>
+      <div className="text-sm text-purple-400 font-bold">{points} points</div>
+      <div className="text-xs text-gray-400">{icePlunges?.length} ice plunges</div>
+      <div className="text-xs text-gray-400">{cardioSessions?.length} cardio sessions</div>
       <div className="mt-2 h-fit w-fit flex flex-wrap">
         {workouts?.map((workout, i) => (
           <div
