@@ -16,14 +16,9 @@ export default function HistoryGrid({
   icePlunges,
   cardioSessions
 }: Props) {
-  // export default function HistoryGrid() {
   const i = 45;
   const [points, setPoints] = React.useState(0);
   useEffect(() => {
-   // ice plunges worth 1 point
-   // cardio sessions worth 1 point
-   // 1 point for every completedworkout where status === "completed"
-   // -1 point for every completedworkout where status === "skipped"
    const icePlungesPoints = icePlunges?.length
     const cardioSessionsPoints = cardioSessions?.length
     const completedWorkoutsPoints = completedWorkouts?.filter((completedWorkout) => {
@@ -38,16 +33,11 @@ export default function HistoryGrid({
     <div className="flex flex-col text-white mx-auto">
       <div className="text-lg font-bold">{user?.username}</div>
       <div className="text-gray-400">{points} points</div>
-      <div className="mt-2 grid h-fit w-fit grid-cols-7 gap-1">
-        {/* {[...Array(i)].map((_, i) => ( */}
+      <div className="mt-2 h-fit w-fit flex flex-wrap">
         {workouts?.map((workout, i) => (
           <div
             key={i}
-            className={`h-3 w-3 bg-base ${
-              // if there is a workout in completedWorkouts with workoutId === workout.id and status === "completed" color green
-              // if it is skipped color red
-              // if it is not completed or skipped color gray
-
+            className={`m-0.5 h-4 w-4 bg-base ${
               completedWorkouts?.find((completedWorkout) => {
                 return (
                   completedWorkout.workoutId === workout.id &&

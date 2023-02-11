@@ -14,7 +14,7 @@ export default function Leaderboard({}: Props) {
       <div className="flex h-auto flex-col items-center justify-center gap-2 bg-paper p-4">
         {/* circle img placeholder */}
         <div className="flex h-12 w-full flex-row items-center rounded p-2 text-white">
-          <div className="mr-3 h-8 w-8 rounded-full bg-black"></div>
+          <img src="/bigwipes.png" className="mr-3 h-8 w-8 rounded-full bg-base" />
           <div className="flex flex-col w-full">
             <div>bigwipes</div>
             {/* progress bar */}
@@ -29,8 +29,7 @@ export default function Leaderboard({}: Props) {
           </div>
         </div>{" "}
         <div className="flex h-12 w-full flex-row items-center rounded p-2 text-white">
-          <div className="mr-3 h-8 w-8 rounded-full bg-black"></div>
-          <div className="flex flex-col w-full">
+        <img src="/Padfoot.png" className="mr-3 h-8 w-8 rounded-full bg-base" />          <div className="flex flex-col w-full">
             <div>Padfoot</div>
               {/* Black background bar */}
               <div className="flex h-2 w-full flex-row items-center rounded bg-black">
@@ -43,8 +42,7 @@ export default function Leaderboard({}: Props) {
           </div>
         </div>{" "}
         <div className="flex h-12 w-full flex-row items-center rounded p-2 text-white">
-          <div className="mr-3 h-8 w-8 rounded-full bg-black"></div>
-          <div className="flex flex-col w-full">
+        <img src="/DangerJones.png" className="mr-3 h-8 w-8 rounded-full bg-base" />          <div className="flex flex-col w-full">
             <div>DangerJones</div>
                {/* Black background bar */}
                <div className="flex h-2 w-full flex-row items-center rounded bg-black">
