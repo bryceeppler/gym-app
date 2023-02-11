@@ -46,4 +46,29 @@ export const usersRouter = createTRPCRouter({
         console.log(err);
       }
     }),
+    getAllUserPoints: publicProcedure.query(({ ctx }) => {
+      return ctx.prisma.users.findMany({
+        include: {
+          completedWorkouts: true,
+          icePlunges: true,
+          cardioSessions: true,
+        },
+      }).then((users) => {
+        const calculatedUsers = users.map((user) => {
+          const icePlungesPoints = user.icePlunges.length;
+          const cardioSessionsPoints = user.cardioSessions.filter((cardioSession) => cardioSession.duration && cardioSession.duration > 15).length;
+          const completedWorkoutsPoints = user.completedWorkouts.filter((completedWorkout) => completedWorkout.status === "completed").length;
+          const totalPoints = icePlungesPoints + cardioSessionsPoints + completedWorkoutsPoints;
+          return {
+          username: user.username || "",
+          userId: user.id,
+          icePlungesPoints,
+          cardioSessionsPoints,
+          completedWorkoutsPoints,
+          totalPoints,
+        };
+      });
+      return calculatedUsers;
+    });
+  }),
 });
