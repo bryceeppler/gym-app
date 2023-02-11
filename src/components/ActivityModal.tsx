@@ -74,7 +74,7 @@ export default function ActivityModal() {
         <div className="text-lg font-bold">Select an activity</div>
         <div className="flex flex-row gap-4">
           <div
-            className={`rounded bg-paper p-4 transition-colors hover:bg-indigo-400 ${
+            className={`rounded bg-paper px-4 py-2 transition-colors hover:bg-indigo-400 ${
               activity === "coldplunge" ? "bg-indigo-500" : ""
             }`}
             onClick={() => {
@@ -84,7 +84,7 @@ export default function ActivityModal() {
             Cold plunge
           </div>
           <div
-            className={`rounded bg-paper p-4 transition-colors hover:bg-indigo-400 ${
+            className={`rounded bg-paper px-4 py-2 transition-colors hover:bg-indigo-400 ${
               activity === "cardio" ? "bg-indigo-500" : ""
             }`}
             onClick={() => {
@@ -97,7 +97,7 @@ export default function ActivityModal() {
         <div className="text-lg font-bold">Date</div>
         <div className="flex flex-row gap-4">
           <div
-            className={`rounded bg-paper p-4 transition-colors hover:bg-indigo-400 ${
+            className={`rounded bg-paper px-4 py-2 transition-colors hover:bg-indigo-400 ${
               date === "yesterday" ? "bg-indigo-500" : ""
             }`}
             onClick={() => {
@@ -107,7 +107,7 @@ export default function ActivityModal() {
             Yesterday
           </div>{" "}
           <div
-            className={`rounded bg-paper p-4 transition-colors hover:bg-indigo-400 ${
+            className={`rounded bg-paper px-4 py-2 transition-colors hover:bg-indigo-400 ${
               date === "today" ? "bg-indigo-500" : ""
             }`}
             onClick={() => {
